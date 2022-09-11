@@ -27,7 +27,7 @@ BuildRequires: make
 
 %description
 A library for instrumenting and integrating with all aspects of the Unity
-shell and providing some integration features with Plasma. Thanks to https://src.fedoraproject.org/rpms/libunity for the original RPM spec.
+shell devel version with headers. Thanks to https://src.fedoraproject.org/rpms/libunity for the original RPM spec.
 
 %package devel
 Summary:  Development files for %{name}
@@ -61,7 +61,7 @@ export PYTHON
   --disable-schemas-compile \
   --disable-silent-rules \
   --disable-static
-             
+
 %make_build
 
 
@@ -73,7 +73,7 @@ export PYTHON
 rm -fv \
   %{buildroot}%{_libdir}/lib*.la \
   %{buildroot}%{_libdir}/libunity/*.{la,so}
- 
+
 %py_byte_compile %{__python3} %{buildroot}%{python3_sitearch}/gi/overrides/
 
 %ldconfig_post
