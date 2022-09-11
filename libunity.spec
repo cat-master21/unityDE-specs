@@ -7,7 +7,7 @@ Release: 1
 License: GPLv3
 URL:	 https://launchpad.net/libunity
 # same sources as shipped in ubuntu packages
-Source0: https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/libunity/%{version}+19.04.20190319-0ubuntu1/libunity_%{version}+19.04.20190319.orig.tar.gz
+Source0: http://archive.ubuntu.com/ubuntu/pool/main/libu/libunity/libunity_%{version}+19.04.20190319.orig.tar.gz
 Patch0:  https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/libunity/%{version}+19.04.20190319-0ubuntu1/libunity_%{version}+19.04.20190319-0ubuntu1.diff.gz
 
 Patch0001:  https://launchpadlibrarian.net/443817430/0001-Fix-FTB-with-recent-vala-requiring-non-public-abstra.patch

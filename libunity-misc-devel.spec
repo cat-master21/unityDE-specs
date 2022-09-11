@@ -6,7 +6,7 @@ BuildArch:      %{_arch}
 
 License:        LGPLv2+
 URL:            https://launchpad.net/libunity-misc
-Source0:        http://archive.ubuntu.com/ubuntu/pool/universe/libu/libunity-misc/libunity-misc_4.0.5+14.04.20140115.orig.tar.gz
+Source0:        https://archive.ubuntu.com/ubuntu/pool/universe/libu/libunity-misc/libunity-misc_4.0.5+14.04.20140115.orig.tar.gz
 # you can't download launchpad bzr sources
 
 BuildRequires:  make
