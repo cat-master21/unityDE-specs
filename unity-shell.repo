@@ -1,0 +1,9 @@
+[unity-shell]
+name=Unity shell
+baseurl=https://github
+skip_if_unavailable=True
+priority=10
+enabled=1
+metadata_expire=7d
+repo_gpgcheck=0
+gpgcheck=0
