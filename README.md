@@ -9,7 +9,7 @@ Unity shell which had only been done [once before a long time ago](https://githu
 * [X] libunity-misc-devel
 * [] geis-devel
 * [] nux-devel
-* [] libunity-settings-daemon-devel
+* [] unity-settings-daemon-devel
 * [X] compiz9
 #### related to Unity but not needed (especially non devel)
 * [X] libunity
@@ -22,3 +22,4 @@ Unity shell which had only been done [once before a long time ago](https://githu
 * [] libunity-settings-daemon
 * [] nux
 * [X] ccsm9
+* [] unity-settings-daemon
