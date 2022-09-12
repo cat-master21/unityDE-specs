@@ -3,8 +3,7 @@ Summary: Library for integrating with Unity and Plasma
 Version: 7.1.4
 Release: 1
 
-# most files LGPLv3, with a handful of GPLv3 (unity-sound-menu* sources in particular)
-License: GPLv3
+License: GPLv3 and LGPLv3
 URL:	 https://launchpad.net/libunity
 # same sources as shipped in ubuntu packages
 Source0: http://archive.ubuntu.com/ubuntu/pool/main/libu/libunity/libunity_%{version}+19.04.20190319.orig.tar.gz
@@ -67,11 +66,7 @@ export PYTHON
 %install
 %make_install
 
-## unpackaged files
-# libtool, unused lib symlink
-rm -fv \
-  %{buildroot}%{_libdir}/lib*.la \
-  %{buildroot}%{_libdir}/libunity/*.{la,so}
+rm -fv %{buildroot}%{_libdir}/lib*.la
 
 %py_byte_compile %{__python3} %{buildroot}%{python3_sitearch}/gi/overrides/
 
@@ -98,7 +93,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 %{_libdir}/girepository-1.0/Unity-7.0.typelib
 %{_libdir}/girepository-1.0/UnityExtras-7.0.typelib
 %dir %{_libdir}/libunity/
-%{_libdir}/libunity/libunity-protocol-private.so.*
+%{_libdir}/libunity/libunity-protocol-private.so
+%{_libdir}/libunity/libunity-protocol-private.so.0
+%{_libdir}/libunity/libunity-protocol-private.so.0.0.0
 %{_datadir}/glib-2.0/schemas/com.canonical.Unity.Lenses.gschema.xml
 %{_datadir}/unity/
 %{_datadir}/unity-scopes/
