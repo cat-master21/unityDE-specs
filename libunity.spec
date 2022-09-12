@@ -58,7 +58,6 @@ PYTHON=%{__python3}
 export PYTHON
 
 %configure \
-  --disable-schemas-compile \
   --disable-silent-rules \
   --disable-static
 

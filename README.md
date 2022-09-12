@@ -19,7 +19,7 @@ Unity shell which had only been done [once before a long time ago](https://githu
 * [] unity-control-center
 * [] unity-control-center-devel
 * [] geis
-* [] libunity-settings-daemon
+* [] unity-greeter
 * [] nux
 * [X] ccsm9
 * [] unity-settings-daemon
