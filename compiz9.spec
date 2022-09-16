@@ -55,7 +55,6 @@ Requires:      xorg-x11-server-Xorg
 Requires:      metacity
 Requires:      glx-utils
 
-%global debug_package %{nil}
 %global source_date_epoch_from_changelog 0
 
 %package ccsm9

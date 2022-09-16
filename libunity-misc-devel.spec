@@ -7,7 +7,6 @@ BuildArch:      %{_arch}
 License:        LGPLv2+
 URL:            https://launchpad.net/libunity-misc
 Source0:        http://archive.ubuntu.com/ubuntu/pool/universe/libu/libunity-misc/libunity-misc_4.0.5+14.04.20140115.orig.tar.gz
-# you can't download launchpad bzr sources
 
 BuildRequires:  make
 BuildRequires:  g++
@@ -27,32 +26,19 @@ A simple library that implements a subset of the XPath spec to allow selecting n
 %prep
 %setup -q -n libunity-misc-4.0.5+14.04.20140115
 find ./ -type f -exec sed -i 's/-Werror//' {} \;
+NOCONFIGURE=1 \
 ./autogen.sh
 
 %build
-$configure
+%configure \
+  --disable-silent-rules \
+  --disable-static
 %make_build
 
 %install
 %make_install
-#This not following prefix that configure makes things more difficult
-rm -rf %{buildroot}/src %{buildroot}/lib
-mv %{buildroot}/usr/local/* %{buildroot}/usr
-rm -rf %{buildroot}/usr/local
-mkdir -p %{buildroot}%{_libdir}
-cp -r %{buildroot}/usr/lib/* %{buildroot}%{_libdir}/
-rm -rf %{buildroot}/usr/lib %{buildroot}%{_libdir}/libunity-misc.la %{buildroot}%{_libdir}/pkgconfig/unity-misc.pc
-echo 'prefix=/usr
-exec_prefix=${prefix}
-libdir=${exec_prefix}/lib64
-includedir=${prefix}/include
-
-Name: libunity-misc
-Description: A library to build misc for Unity
-Version: 4.0.4
-Libs: -L${libdir} -lunity-misc
-Cflags: -I${includedir}/unity-misc/unity-misc
-Requires: glib-2.0 gthread-2.0 gobject-2.0 gio-2.0 gio-unix-2.0 gtk+-3.0' > %{buildroot}%{_libdir}/pkgconfig/unity-misc.pc
+rm -fv %{buildroot}%{_libdir}/lib*.la
+%ldconfig_post
 
 %files
 %{_libdir}/libunity-misc.so
