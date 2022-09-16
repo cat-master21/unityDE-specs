@@ -119,4 +119,3 @@ sed -i 'sn^n%{_usr}/n' ./files.txt
 %{python3_sitearch}/*
 
 %changelog
-
