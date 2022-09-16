@@ -107,7 +107,8 @@ sed -i 'sn^n%{_usr}/n' ./files.txt
 %config %{_sysconfdir}/compizconfig/config.conf
 
 %files ccsm9 -f ccsm.lang
-%doc AUTHORS COPYING NEWS
+%doc AUTHORS NEWS
+%license COPYING
 %{_bindir}/ccsm
 %{_datadir}/applications/ccsm.desktop
 %dir %{_datadir}/ccsm

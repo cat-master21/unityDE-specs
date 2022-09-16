@@ -48,6 +48,6 @@ sed -i s/^\.\\/// ./files.txt
 sed -i 'sn^n%{_usr}/n' ./files.txt
 
 %files -f files.txt
-%doc COPYING COPYING.GPL3
+%license COPYING COPYING.GPL3
 
 %changelog
