@@ -13,7 +13,7 @@ Unity shell which had only been done [once before a long time ago](https://githu
 * [] nux-devel
 * [] unity-settings-daemon-devel
 * [X] compiz9
-* [] grail-devel
+* [X] grail-devel
 * [X] frame-devel
 #### related to Unity but not needed (especially non devel)
 * [X] libunity
