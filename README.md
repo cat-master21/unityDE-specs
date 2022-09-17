@@ -24,6 +24,7 @@ Unity shell which had only been done [once before a long time ago](https://githu
 * [] unity-control-center-devel
 * [] geis
 * [] unity-greeter
+* [] unity-session
 * [] nux
 * [X] ccsm9
 * [] unity-settings-daemon
