@@ -9,7 +9,7 @@ Unity shell which had only been done [once before a long time ago](https://githu
 * [X] xpathselect-devel
 * [X] libunity-devel
 * [X] libunity-misc-devel
-* [] geis-devel
+* [X] geis-devel
 * [] nux-devel
 * [] unity-settings-daemon-devel
 * [X] compiz9
@@ -19,7 +19,7 @@ Unity shell which had only been done [once before a long time ago](https://githu
 * [X] libunity
 * [] xpathselect
 * [] libunity-misc
-* [] unity-tweak-tool
+* [] unity-tweak-tool (from: https://github.com/freyja-dev/unity-tweak-tool and add later commits with patches and add Ubuntu font patch)
 * [] unity-control-center
 * [] unity-control-center-devel
 * [] geis
