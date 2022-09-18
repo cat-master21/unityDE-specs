@@ -1,4 +1,4 @@
-name: build website
+name: build all RPMs
 on: workflow_dispatch
 
 jobs:
@@ -55,6 +55,7 @@ jobs:
         rpmbuild --nodebuginfo -bb ./grail-devel.spec
 
     - name: Upload RPMs
+      if: success() || failure()
       uses: actions/upload-artifact@v3.1.0
       with:
           name: Built RPMS
