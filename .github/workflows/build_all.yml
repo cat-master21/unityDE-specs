@@ -16,8 +16,10 @@ jobs:
 
     - name: Download RPMs
       run: |
-      rpmdev-setuptree
-      for i in ./*.spec; do spectool -R -g $i &
+      'rpmdev-setuptree'
+      for i in ./*.spec
+      do
+      spectool -R -g $i &
       done
       wait
 
