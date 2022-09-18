@@ -103,7 +103,8 @@ sed -i s/^\.\\/// ./files.txt
 sed -i 'sn^n%{_usr}/n' ./files.txt
 
 %files -f files.txt
-%doc AUTHORS COPYING COPYING.GPL COPYING.LGPL COPYING.MIT README INSTALL NEWS
+%doc AUTHORS README INSTALL NEWS
+%license: COPYING COPYING.GPL COPYING.LGPL COPYING.MIT
 %config %{_sysconfdir}/compizconfig/config.conf
 
 %files ccsm9 -f ccsm.lang
