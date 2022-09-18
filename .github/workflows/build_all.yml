@@ -28,10 +28,10 @@ jobs:
         yum-builddep -y --spec ./xpathselect-devel.spec
         rpmbuild --nodebuginfo -bb ./xpathselect-devel.spec
 
-    - name: Build libunity-devel
+    - name: Build libunity
       run: |
-        yum-builddep -y --spec ./libunity-devel.spec
-        rpmbuild --nodebuginfo -bb ./libunity-devel.spec
+        yum-builddep -y --spec ./libunity.spec
+        rpmbuild --nodebuginfo -bb ./libunity.spec
 
     - name: Build libunity-misc-devel
       run: |
