@@ -104,7 +104,7 @@ sed -i 'sn^n%{_usr}/n' ./files.txt
 
 %files -f files.txt
 %doc AUTHORS README INSTALL NEWS
-%license: COPYING COPYING.GPL COPYING.LGPL COPYING.MIT
+%license COPYING COPYING.GPL COPYING.LGPL COPYING.MIT
 %config %{_sysconfdir}/compizconfig/config.conf
 
 %files ccsm9 -f ccsm.lang
