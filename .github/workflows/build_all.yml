@@ -50,7 +50,7 @@ jobs:
 
     - name: Build grail-devel
       run: |
-        rpm -ivh "$(rpm --eval '%{_rpmdir}')"/frame-devel*
+        rpm -ivh "$(rpm --eval '%{_rpmdir}')"/x86_64/frame-devel*
         yum-builddep -y --spec ./grail-devel.spec
         rpmbuild --nodebuginfo -bb ./grail-devel.spec
 
@@ -59,4 +59,4 @@ jobs:
       uses: actions/upload-artifact@v3.1.0
       with:
           name: Built RPMS
-          path: ~/rpmbuild/RPMS/*
+          path: ~/rpmbuild/RPMS/x86_64/*
