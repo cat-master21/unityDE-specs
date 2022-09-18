@@ -2,7 +2,6 @@ Name:           frame-devel
 Version:        2.5.0
 Release:        1
 Summary:        Touch Frame Library
-BuildArch:      %{_arch}
 
 License:        GPLv3+
 URL:            https://launchpad.net/frame

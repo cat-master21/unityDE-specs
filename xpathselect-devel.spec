@@ -2,7 +2,6 @@ Name:           xpathselect-devel
 Version:        1.4
 Release:        1
 Summary:        Implements a subset of the XPath spec
-BuildArch:      %{_arch}
 
 License:        GPLv3+
 URL:            https://launchpad.net/xpathselect

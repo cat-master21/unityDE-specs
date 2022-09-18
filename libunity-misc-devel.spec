@@ -2,7 +2,6 @@ Name:           libunity-misc-devel
 Version:        1.4
 Release:        1
 Summary:        Misc Unity shell libs
-BuildArch:      %{_arch}
 
 License:        LGPLv2+
 URL:            https://launchpad.net/libunity-misc

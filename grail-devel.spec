@@ -2,7 +2,6 @@ Name:           grail-devel
 Version:        3.1.1
 Release:        1
 Summary:        Gesture Recognition And Instantiation Library
-BuildArch:      %{_arch}
 
 License:        GPLv3+
 URL:            https://launchpad.net/grail

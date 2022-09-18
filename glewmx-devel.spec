@@ -2,7 +2,6 @@ Name:           glewmx-devel
 Version:        1.13.0
 Release:        1
 Summary:        OpenGL Extension Wrangler MX
-BuildArch:      %{_arch}
 
 License:        GPLv3+
 URL:            https://launchpad.net/ubuntu/+source/glewmx

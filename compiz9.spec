@@ -1,9 +1,8 @@
 Name:           compiz9
-License:        GPLv2+ and LGPLv2+ and MIT
+License:        GPLv2+ AND LGPLv2+ AND MIT
 Version:        0.9.14.2
 Release:        1
 Summary:        OpenGL window and compositing manager 0.9 series
-BuildArch:      x86_64
 URL:            https://launchpad.net/compiz
 Source0:        %{url}/0.9.14/%{version}/+download/compiz-%{version}.tar.xz
 
@@ -86,7 +85,6 @@ desktop-file-install                              \
 find %{buildroot} -name '*.la' -exec rm -f {} ';'
 find %{buildroot} -name '*.a' -exec rm -f {} ';'
 
-#%find_lang compiz
 %find_lang ccsm
 
 # placeholder for local icons

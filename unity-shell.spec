@@ -2,7 +2,6 @@ Name:           unity-shell
 Version:        0.0.1
 Release:        1
 Summary:        Unity7 is a shell that sings for the GNOME desktop environment
-BuildArch:      noarch
 
 License:        GPLv3+
 URL:            https://gitlab.com/ubuntu-unity/unity/unity
