@@ -1,0 +1,59 @@
+name: build website
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: fedora
+      env:
+        shell: bash
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install dependencies
+      run: dnf install -y dnf-utils curl rpmdevtools rpm-build
+
+    - name: Download RPMs
+      run: |
+      rpmdev-setuptree
+      for i in ./*.spec; do spectool -R -g $i &
+      done
+      wait
+
+    - name: Build xpathselect-devel
+      run: |
+      yum-builddep -y --spec ./xpathselect-devel.spec
+      rpmbuild --nodebuginfo -bb ./xpathselect-devel.spec
+
+    - name: Build libunity-devel
+      run: |
+      yum-builddep -y --spec ./libunity-devel.spec
+      rpmbuild --nodebuginfo -bb ./libunity-devel.spec
+
+    - name: Build libunity-misc-devel
+      run: |
+      yum-builddep -y --spec ./libunity-misc-devel.spec
+      rpmbuild --nodebuginfo -bb ./libunity-misc-devel.spec
+
+    - name: Build compiz9
+      run: |
+      yum-builddep -y --spec ./compiz9.spec
+      rpmbuild --nodebuginfo -bb ./compiz9.spec
+
+    - name: Build frame-devel
+      run: |
+      yum-builddep -y --spec ./frame-devel.spec
+      rpmbuild --nodebuginfo -bb ./frame-devel.spec
+
+    - name: Build grail-devel
+      run: |
+      rpm -ivh "$(rpm --eval '%{_rpmdir}')"/frame-devel*
+      yum-builddep -y --spec ./grail-devel.spec
+      rpmbuild --nodebuginfo -bb ./grail-devel.spec
+
+    - name: Upload RPMs
+      uses: actions/upload-artifact@v3.1.0
+      with:
+          name: Built RPMS
+          path: ~/rpmbuild/RPMS/*
