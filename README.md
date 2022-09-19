@@ -12,7 +12,7 @@ Unity shell which had only been done [once before a long time ago](https://githu
 * [X] geis-devel
 * [X] glewmx-devel
 * [X] nux-devel
-* [] unity-settings-daemon-devel
+* [X] unity-settings-daemon-devel
 * [X] compiz9
 * [X] grail-devel
 * [X] frame-devel
