@@ -56,7 +56,7 @@ jobs:
 
     - name: Build geis-devel
       run: |
-        rpm -ivh "$(rpm --eval '%{_rpmdir}')"/x86_64/geis-devel*
+        rpm -ivh "$(rpm --eval '%{_rpmdir}')"/x86_64/grail-devel*
         yum-builddep -y --spec ./geis-devel.spec
         rpmbuild --nodebuginfo -bb ./geis-devel.spec
 
