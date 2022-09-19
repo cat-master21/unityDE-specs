@@ -91,7 +91,10 @@ find %{buildroot} -name '*.a' -exec rm -f {} ';'
 mkdir -p %{buildroot}%{_datadir}/compiz/icons/hicolor/{scalable/{apps,\
 categories},22x22/{categories,devices,mimetypes}}
 
-rm -rf %{buildroot}/usr/share/cmake-*
+pushd %{buildroot}
+mkdir -p usr/share/cmake/Modules
+ln -sf usr/share/cmake-*/* usr/share/cmake/Modules
+popd
 
 pushd %{buildroot}/usr
 find . ! -type d -exec ls {} + | grep -v ccm | grep -v ccsm | grep -v ccm | grep -v python > %{_builddir}/compiz-%{version}/files.txt

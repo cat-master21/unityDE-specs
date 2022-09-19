@@ -17,6 +17,7 @@ Unity shell which had only been done [once before a long time ago](https://githu
 * [X] grail-devel
 * [X] frame-devel
 * [X] gsettings-ubuntu-touch-schemas-devel
+* [] ido-devel
 #### related to Unity but not needed (especially non devel)
 * [X] libunity
 * [] xpathselect
@@ -34,6 +35,7 @@ Unity shell which had only been done [once before a long time ago](https://githu
 * [] frame
 * [] glewmx
 * [] gsettings-ubuntu-touch-schemas
+* [] ido
 
 # Contributing
 See [CONTRIBUTING.md](https://github.com/cat-master21/unityDE-specs/blob/main/CONTRIBUTING.md) for info on how to contribute. Thanks for spending time to do so!
