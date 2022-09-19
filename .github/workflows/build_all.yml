@@ -54,6 +54,40 @@ jobs:
         yum-builddep -y --spec ./grail-devel.spec
         rpmbuild --nodebuginfo -bb ./grail-devel.spec
 
+    - name: Build geis-devel
+      run: |
+        rpm -ivh "$(rpm --eval '%{_rpmdir}')"/x86_64/geis-devel*
+        yum-builddep -y --spec ./geis-devel.spec
+        rpmbuild --nodebuginfo -bb ./geis-devel.spec
+
+    - name: Build glewmx-devel
+      run: |
+        yum-builddep -y --spec ./glewmx-devel.spec
+        rpmbuild --nodebuginfo -bb ./glewmx-devel.spec
+
+    - name: Build nux-devel
+      run: |
+        rpm -ivh "$(rpm --eval '%{_rpmdir}')"/x86_64/geis-devel* "$(rpm --eval '%{_rpmdir}')"/x86_64/glewmx-devel*
+        yum-builddep -y --spec ./nux-devel.spec
+        rpmbuild --nodebuginfo -bb ./nux-devel.spec
+
+    - name: Build gsettings-ubuntu-touch-schemas-devel
+      run: |
+        yum-builddep -y --spec ./gsettings-ubuntu-touch-schemas-devel.spec
+        rpmbuild --nodebuginfo -bb ./gsettings-ubuntu-touch-schemas-devel.spec
+
+    - name: Build unity-settings-daemon-devel
+      run: |
+        rpm -ivh "$(rpm --eval '%{_rpmdir}')"/x86_64/gsettings-ubuntu-touch-schemas-devel*
+        yum-builddep -y --spec ./unity-settings-daemon-devel.spec
+        rpmbuild --nodebuginfo -bb ./unity-settings-daemon-devel.spec
+
+#    - name: Build unity-shell
+#      run: |
+#        rpm -ivh "$(rpm --eval '%{_rpmdir}')"/x86_64/*.rpm
+#        yum-builddep -y --spec ./unity-shell.spec
+#        rpmbuild --nodebuginfo -bb ./unity-shell.spec
+
     - name: Upload RPMs
       if: success() || failure()
       uses: actions/upload-artifact@v3.1.0
