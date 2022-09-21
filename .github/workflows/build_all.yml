@@ -1,5 +1,5 @@
 name: build all RPMs
-on: workflow_dispatch
+on: push
 
 jobs:
   build:
@@ -92,5 +92,5 @@ jobs:
       if: success() || failure()
       uses: actions/upload-artifact@v3.1.0
       with:
-          name: Built RPMS
+          name: Built-RPMS
           path: ~/rpmbuild/RPMS/x86_64/*
