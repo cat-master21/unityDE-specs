@@ -3,7 +3,7 @@ Version:        0.0.7+21.10.20210712
 Release:        1
 Summary:        Shared GSettings schemas for Ubuntu touch settings
 
-License:        GPLv2 AND LGPLv2.1
+License:        GPLv2 AND LGPLv2+
 URL:            https://launchpad.net/gsettings-ubuntu-touch-schemas
 Source0:        http://archive.ubuntu.com/ubuntu/pool/main/g/gsettings-ubuntu-touch-schemas/gsettings-ubuntu-touch-schemas_%{version}.orig.tar.gz
 %global source_date_epoch_from_changelog 0

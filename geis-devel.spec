@@ -3,7 +3,7 @@ Version:        2.2.17
 Release:        1
 Summary:        An implementation of the GEIS interface
 
-License:        GPLv3 AND LGPLv3
+License:        GPLv3+ AND LGPLv3+
 URL:            https://launchpad.net/geis
 Source0:        http://archive.ubuntu.com/ubuntu/pool/universe/g/geis/geis_2.2.17+16.04.20160126.orig.tar.gz
 Patch0:         http://archive.ubuntu.com/ubuntu/pool/universe/g/geis/geis_2.2.17+16.04.20160126-0ubuntu8.diff.gz

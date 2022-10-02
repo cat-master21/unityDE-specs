@@ -6,6 +6,7 @@ Summary:        Misc Unity shell libs
 License:        LGPLv2+
 URL:            https://launchpad.net/libunity-misc
 Source0:        http://archive.ubuntu.com/ubuntu/pool/universe/libu/libunity-misc/libunity-misc_4.0.5+14.04.20140115.orig.tar.gz
+%global source_date_epoch_from_changelog 0
 
 BuildRequires:  make
 BuildRequires:  g++
@@ -14,9 +15,9 @@ BuildRequires:  libX11-devel
 BuildRequires:  gnome-common
 BuildRequires:  gtk-doc
 BuildRequires:  libX11-devel
-BuildRequires:  gtk3-devel
+BuildRequires:  gtk3-ubuntu-devel
 BuildRequires:  glib2-devel
-Requires:       gtk3
+Requires:       gtk3-ubuntu
 Requires:       libX11
 
 %description

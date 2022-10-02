@@ -3,7 +3,7 @@ Summary: Library for integrating with Unity and Plasma
 Version: 7.1.4
 Release: 1
 
-License: GPLv3 AND LGPLv3
+License: GPLv3+ AND LGPLv3+
 URL:     https://launchpad.net/libunity
 # same sources as shipped in ubuntu packages
 Source0: http://archive.ubuntu.com/ubuntu/pool/main/libu/libunity/libunity_%{version}+19.04.20190319.orig.tar.gz

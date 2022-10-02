@@ -3,7 +3,7 @@ Version:        4.0.8
 Release:        1
 Summary:        An OpenGL toolkit
 
-License:        GPLv3 AND LGPLv3 AND LGPLv2.1
+License:        GPLv3+ AND LGPLv3+ AND LGPLv2+
 URL:            https://launchpad.net/nux
 Source0:        http://archive.ubuntu.com/ubuntu/pool/universe/n/nux/nux_4.0.8+18.10.20180623.orig.tar.gz
 Patch0:         http://archive.ubuntu.com/ubuntu/pool/universe/n/nux/nux_4.0.8+18.10.20180623-0ubuntu4.diff.gz

@@ -12,7 +12,7 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Install dependencies
-      run: dnf install -y dnf-utils curl rpmdevtools rpm-build
+      run: dnf install -y curl rpmdevtools rpm-build
 
     - name: Download RPMs
       run: |
@@ -25,67 +25,67 @@ jobs:
 
     - name: Build xpathselect-devel
       run: |
-        yum-builddep -y --spec ./xpathselect-devel.spec
+        dnf builddep -y --spec ./xpathselect-devel.spec
         rpmbuild --nodebuginfo -bb ./xpathselect-devel.spec
 
     - name: Build libunity
       run: |
-        yum-builddep -y --spec ./libunity.spec
+        dnf builddep -y --spec ./libunity.spec
         rpmbuild --nodebuginfo -bb ./libunity.spec
 
     - name: Build libunity-misc-devel
       run: |
-        yum-builddep -y --spec ./libunity-misc-devel.spec
+        dnf builddep -y --spec ./libunity-misc-devel.spec
         rpmbuild --nodebuginfo -bb ./libunity-misc-devel.spec
 
     - name: Build compiz9
       run: |
-        yum-builddep -y --spec ./compiz9.spec
+        dnf builddep -y --spec ./compiz9.spec
         rpmbuild --nodebuginfo -bb ./compiz9.spec
 
     - name: Build frame-devel
       run: |
-        yum-builddep -y --spec ./frame-devel.spec
+        dnf builddep -y --spec ./frame-devel.spec
         rpmbuild --nodebuginfo -bb ./frame-devel.spec
 
     - name: Build grail-devel
       run: |
         rpm -ivh "$(rpm --eval '%{_rpmdir}')"/x86_64/frame-devel*
-        yum-builddep -y --spec ./grail-devel.spec
+        dnf builddep -y --spec ./grail-devel.spec
         rpmbuild --nodebuginfo -bb ./grail-devel.spec
 
     - name: Build geis-devel
       run: |
         rpm -ivh "$(rpm --eval '%{_rpmdir}')"/x86_64/grail-devel*
-        yum-builddep -y --spec ./geis-devel.spec
+        dnf builddep -y --spec ./geis-devel.spec
         rpmbuild --nodebuginfo -bb ./geis-devel.spec
 
     - name: Build glewmx-devel
       run: |
-        yum-builddep -y --spec ./glewmx-devel.spec
+        dnf builddep -y --spec ./glewmx-devel.spec
         rpmbuild --nodebuginfo -bb ./glewmx-devel.spec
 
     - name: Build nux-devel
       run: |
         rpm -ivh "$(rpm --eval '%{_rpmdir}')"/x86_64/geis-devel* "$(rpm --eval '%{_rpmdir}')"/x86_64/glewmx-devel*
-        yum-builddep -y --spec ./nux-devel.spec
+        dnf builddep -y --spec ./nux-devel.spec
         rpmbuild --nodebuginfo -bb ./nux-devel.spec
 
     - name: Build gsettings-ubuntu-touch-schemas-devel
       run: |
-        yum-builddep -y --spec ./gsettings-ubuntu-touch-schemas-devel.spec
+        dnf builddep -y --spec ./gsettings-ubuntu-touch-schemas-devel.spec
         rpmbuild --nodebuginfo -bb ./gsettings-ubuntu-touch-schemas-devel.spec
 
     - name: Build unity-settings-daemon-devel
       run: |
         rpm -ivh "$(rpm --eval '%{_rpmdir}')"/x86_64/gsettings-ubuntu-touch-schemas-devel*
-        yum-builddep -y --spec ./unity-settings-daemon-devel.spec
+        dnf builddep -y --spec ./unity-settings-daemon-devel.spec
         rpmbuild --nodebuginfo -bb ./unity-settings-daemon-devel.spec
 
 #    - name: Build unity-shell
 #      run: |
 #        rpm -ivh "$(rpm --eval '%{_rpmdir}')"/x86_64/*.rpm
-#        yum-builddep -y --spec ./unity-shell.spec
+#        dnf builddep -y --spec ./unity-shell.spec
 #        rpmbuild --nodebuginfo -bb ./unity-shell.spec
 
     - name: Upload RPMs

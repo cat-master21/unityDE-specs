@@ -29,7 +29,7 @@ Requires:      libunity-misc-devel
 Requires:      libsigc++20
 Requires:      bamf
 Requires:      libnotify
-Requires:      gtk3
+Requires:      gtk3-ubuntu
 Requires:      libstdc++
 Requires:      xpathselect-devel
 Requires:      libappstream-glib

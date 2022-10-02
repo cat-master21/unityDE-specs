@@ -4,7 +4,7 @@ Version:        15.04.1+21.10.20220802
 Release:        1
 Summary:        Daemon handling the Unity session settings
 
-License:        GPLv2 AND LGPLv2.1
+License:        GPLv2 AND LGPLv2+
 URL:            https://launchpad.net/unity-settings-daemon
 Source0:        http://archive.ubuntu.com/ubuntu/pool/universe/u/unity-settings-daemon/unity-settings-daemon_%{version}.orig.tar.gz
 Patch0:         http://archive.ubuntu.com/ubuntu/pool/universe/u/unity-settings-daemon/unity-settings-daemon_%{version}-0ubuntu1.diff.gz

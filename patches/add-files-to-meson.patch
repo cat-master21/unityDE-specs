@@ -1,0 +1,20 @@
+--- gtk/meson.build	2022-03-03 20:42:12.000000000 -0800
++++ meson.build.new	2022-09-29 18:20:18.455698467 -0700
+@@ -17,6 +17,7 @@
+ 
+ # List of sources to build the library from
+ gtk_sources = files(
++  'ubuntumenuitemfactory.c',
+   'gtkactionmuxer.c',
+   'gtkactionobserver.c',
+   'gtkactionobservable.c',
+@@ -393,6 +394,8 @@
+ )
+ 
+ gtk_gir_public_headers = files(
++  'ubuntu-private.h',
++  'ubuntumenuitemfactory.h',
+   'gtk.h',
+   'gtk-autocleanups.h',
+   'gtkx-autocleanups.h',
+
