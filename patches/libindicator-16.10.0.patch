@@ -1,0 +1,79 @@
+diff --git a/libindicator.spec b/libindicator.spec
+index 174d093..c122bc3 100644
+--- a/libindicator.spec
++++ b/libindicator.spec
+@@ -1,13 +1,13 @@
+ Name:		libindicator
+-Version:	12.10.1
++Version:	16.10.0
+ Release:	23%{?dist}
+ Summary:	Shared functions for Ayatana indicators
+ 
+ License:	GPLv3
+ URL:		https://launchpad.net/libindicator
+-Source0:	https://launchpad.net/libindicator/12.10/12.10.1/+download/%{name}-%{version}.tar.gz
++Source0:	http://archive.ubuntu.com/ubuntu/pool/universe/libi/libindicator/libindicator_16.10.0+18.04.20180321.1.orig.tar.gz
+ # From GLib 2.62
+-Patch1:	libindicator-12.10.1-glib262-g_define_type_with_private.patch
++Patch1:	http://archive.ubuntu.com/ubuntu/pool/universe/libi/libindicator/libindicator_16.10.0+18.04.20180321.1-0ubuntu5.diff.gz
+ 
+ BuildRequires:	chrpath
+ BuildRequires:	gtk-doc
+@@ -79,29 +79,14 @@ tools for the GTK+3 build of %{name}.
+ 
+ 
+ %prep
+-%setup -q
++%setup -q -c
+ %if 0%{?fedora} >= 31 || 0%{?rhel} >= 9
+-%patch1 -p2 -b .orig
++%patch1 -p1 -b .orig
+ %endif
+ 
+ sed -i.addvar configure.ac \
+ 	-e '\@LIBINDICATOR_LIBS@s|\$LIBM| \$LIBM|'
+ 
+-# http://bazaar.launchpad.net/~indicator-applet-developers/libindicator/trunk.12.10/view/head:/autogen.sh
+-cat > autogen.sh <<EOF
+-#!/bin/sh
+-
+-PKG_NAME="libindicator"
+-
+-which gnome-autogen.sh || {
+-	echo "You need gnome-common from GNOME SVN"
+-	exit 1
+-}
+-
+-USE_GNOME2_MACROS=1 \
+-. gnome-autogen.sh
+-EOF
+-
+ NOCONFIGURE=1 \
+ 	sh autogen.sh
+ 
+@@ -180,7 +165,7 @@ find %{buildroot} -type f -name '*.la' -delete
+ %{_libdir}/libindicator.so.*
+ %dir %{_datadir}/libindicator/
+ %dir %{_datadir}/libindicator/icons/
+-%{_libdir}/indicators/
++%{_userunitdir}/indicators-pre.target
+ 
+ %files devel
+ %dir %{_includedir}/libindicator-0.4/
+@@ -191,7 +176,7 @@ find %{buildroot} -type f -name '*.la' -delete
+ 
+ 
+ %files tools
+-%{_libexecdir}/indicator-loader
++%{_libexecdir}/indicator-loader3
+ %{_datadir}/libindicator/80indicator-debugging
+ 
+ 
+@@ -200,7 +185,6 @@ find %{buildroot} -type f -name '*.la' -delete
+ %{_libdir}/libindicator3.so.*
+ %dir %{_datadir}/libindicator/
+ %dir %{_datadir}/libindicator/icons/
+-%{_libdir}/indicators3/
+ 
+ 
+ %files gtk3-devel

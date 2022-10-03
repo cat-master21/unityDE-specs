@@ -12,7 +12,7 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Install dependencies
-      run: dnf install -y curl rpmdevtools rpm-build
+      run: dnf install -y curl rpmdevtools rpm-build dnf-utils
 
     - name: Download RPMs
       run: |
@@ -81,6 +81,11 @@ jobs:
         rpm -ivh "$(rpm --eval '%{_rpmdir}')"/x86_64/gsettings-ubuntu-touch-schemas-devel*
         dnf builddep -y --spec ./unity-settings-daemon-devel.spec
         rpmbuild --nodebuginfo -bb ./unity-settings-daemon-devel.spec
+
+    - name: Build gtk3-ubuntu
+      run: |
+        curl "https://src.fedoraproject.org/rpms/gtk3/raw/f$(rpm --eval '%{?fedora}')/f/gtk3.spec" -o ./gtk3.spec
+        patch -p1 ./gtk3.spec ./patches/gtk3-ubuntu.patch
 
 #    - name: Build unity-shell
 #      run: |

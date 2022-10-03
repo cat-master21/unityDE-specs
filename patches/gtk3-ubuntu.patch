@@ -1,5 +1,5 @@
 diff --git a/gtk3.spec b/gtk3.spec
-index 62e0d4f..0d7d630 100644
+index 62e0d4f..acf8f30 100644
 --- a/gtk3.spec
 +++ b/gtk3.spec
 @@ -2,6 +2,7 @@
@@ -19,73 +19,66 @@ index 62e0d4f..0d7d630 100644
  Version: 3.24.34
  Release: 2%{?dist}
  Summary: GTK+ graphical user interface library
-@@ -25,7 +26,11 @@ Summary: GTK+ graphical user interface library
+@@ -25,7 +26,10 @@ Summary: GTK+ graphical user interface library
  License: LGPLv2+
  URL:     https://gtk.org
  Source0: https://download.gnome.org/sources/gtk+/3.24/gtk+-%{version}.tar.xz
 +Source1: http://archive.ubuntu.com/ubuntu/pool/main/g/gtk+3.0/gtk+3.0_%{version}-%{ubuntu_release}.debian.tar.xz
-+Patch0:  add-files-to-meson.patch
++Patch0:  https://raw.githubusercontent.com/cat-master21/unityDE-specs/main/patches/add-files-to-meson.patch
  
-+Obsoletes:     gtk3
 +Provides:      gtk3%{?_isa} = %{version}
  BuildRequires: pkgconfig(atk) >= %{atk_version}
  BuildRequires: pkgconfig(atk-bridge-2.0)
  BuildRequires: pkgconfig(avahi-gobject)
-@@ -99,6 +104,8 @@ This package contains version 3 of GTK+.
+@@ -99,6 +103,7 @@ This package contains version 3 of GTK+.
  
  %package -n gtk-update-icon-cache
  Summary: Icon theme caching utility
-+Obsoletes: gtk3-gtk-update-icon-cache
 +Provides:  gtk3-gtk-update-icon-cache%{?_isa} = %{version}
  
  %description -n gtk-update-icon-cache
  GTK+ can use the cache files created by gtk-update-icon-cache to avoid a lot of
-@@ -108,6 +115,8 @@ applications, the overall memory consumption is reduced as well.
+@@ -108,6 +113,7 @@ applications, the overall memory consumption is reduced as well.
  
  %package immodules
  Summary: Input methods for GTK+
-+Obsoletes: gtk3-immodules
 +Provides:  gtk3-immodules%{?_isa} = %{version}
  Requires: gtk3%{?_isa} = %{version}-%{release}
  # for im-cedilla.conf
  Requires: gtk2-immodules%{?_isa}
-@@ -118,6 +127,8 @@ are shipped as part of GTK+ 3.
+@@ -118,6 +124,7 @@ are shipped as part of GTK+ 3.
  
  %package immodule-xim
  Summary: XIM support for GTK+
-+Obsoletes: gtk3-immodules-xim
 +Provides:  gtk3-immodules-xim%{?_isa} = %{version}
  Requires: gtk3%{?_isa} = %{version}-%{release}
  
  %description immodule-xim
-@@ -125,6 +136,8 @@ The gtk3-immodule-xim package contains XIM support for GTK+ 3.
+@@ -125,6 +132,7 @@ The gtk3-immodule-xim package contains XIM support for GTK+ 3.
  
  %package devel
  Summary: Development files for GTK+
-+Obsoletes: gtk3-devel
 +Provides:  gtk3-devel%{?_isa} = %{version}
  Requires: gtk3%{?_isa} = %{version}-%{release}
  
  %description devel
-@@ -135,6 +148,8 @@ gtk3-devel-docs package.
+@@ -135,6 +143,7 @@ gtk3-devel-docs package.
  
  %package devel-docs
  Summary: Developer documentation for GTK+
-+Obsoletes: gtk3-devel-docs
 +Provides:  gtk3-devel-docs%{?_isa} = %{version}
  Requires: gtk3 = %{version}-%{release}
  
  %description devel-docs
-@@ -143,6 +158,8 @@ widget toolkit.
+@@ -143,6 +152,7 @@ widget toolkit.
  
  %package tests
  Summary: Tests for the %{name} package
-+Obsoletes: gtk3-tests
 +Provides:  gtk3-tests%{?_isa} = %{version}
  Requires: %{name}%{?_isa} = %{version}-%{release}
  
  %description tests
-@@ -150,7 +167,14 @@ The %{name}-tests package contains tests that can be used to verify
+@@ -150,7 +160,14 @@ The %{name}-tests package contains tests that can be used to verify
  the functionality of the installed %{name} package.
  
  %prep
