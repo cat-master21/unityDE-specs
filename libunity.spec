@@ -1,5 +1,5 @@
 Name:    libunity
-Summary: Library for integrating with Unity and Plasma
+Summary: Supporting library for Unity shell
 Version: 7.1.4
 Release: 1
 
@@ -66,7 +66,11 @@ export PYTHON
 %install
 %make_install
 
-rm -fv %{buildroot}%{_libdir}/lib*.la
+rm -fv %{buildroot}%{_libdir}/lib*.la %{buildroot}%{_libdir}/libunity/lib*.la
+
+pushd %{buildroot}
+ln -s .%{_libdir}/libunity/libunity-protocol-private.so.0.0.0 .%{_libdir}/libunity-protocol-private.so
+popd
 
 %py_byte_compile %{__python3} %{buildroot}%{python3_sitearch}/gi/overrides/
 
@@ -108,6 +112,7 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 %{_includedir}/unity/
 %{_libdir}/libunity.so
 %{_libdir}/libunity-extras.so
+%{_libdir}/libunity-protocol-private.so
 %{_libdir}/pkgconfig/unity.pc
 %{_libdir}/pkgconfig/unity-extras.pc
 %{_libdir}/pkgconfig/unity-protocol-private.pc

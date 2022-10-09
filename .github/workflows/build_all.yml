@@ -12,7 +12,7 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Install dependencies
-      run: dnf install -y curl rpmdevtools rpm-build dnf-utils
+      run: dnf install -y curl rpmdevtools rpm-build dnf-utils rubygems
 
     - name: Download RPMs
       run: |
@@ -22,6 +22,15 @@ jobs:
         spectool -R -g $i &
         done
         wait
+
+    - name: Build gtk3-ubuntu
+      run: |
+        curl "https://src.fedoraproject.org/rpms/gtk3/raw/f$(rpm --eval '%{?fedora}')/f/gtk3.spec" -o ./gtk3.spec
+        patch -p1 ./gtk3.spec ./patches/gtk3-ubuntu.patch
+        dnf builddep -y --spec ./gtk3.spec
+        rpmbuild --nodebuginfo -bb ./gtk3.spec
+        rm -f "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu-tests* "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu-devel-docs* "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk-update-icon-cache* "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu-immodule*
+        rpm -ivh "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu*
 
     - name: Build xpathselect-devel
       run: |
@@ -82,20 +91,27 @@ jobs:
         dnf builddep -y --spec ./unity-settings-daemon-devel.spec
         rpmbuild --nodebuginfo -bb ./unity-settings-daemon-devel.spec
 
-    - name: Build gtk3-ubuntu
+    - name: Build ido-devel
       run: |
-        curl "https://src.fedoraproject.org/rpms/gtk3/raw/f$(rpm --eval '%{?fedora}')/f/gtk3.spec" -o ./gtk3.spec
-        patch -p1 ./gtk3.spec ./patches/gtk3-ubuntu.patch
+        dnf builddep -y --spec ./ido-devel.spec
+        rpmbuild --nodebuginfo -bb ./ido-devel.spec
 
-#    - name: Build unity-shell
-#      run: |
-#        rpm -ivh "$(rpm --eval '%{_rpmdir}')"/x86_64/*.rpm
-#        dnf builddep -y --spec ./unity-shell.spec
-#        rpmbuild --nodebuginfo -bb ./unity-shell.spec
+    - name: Build libindicator
+      run: |
+        curl "https://src.fedoraproject.org/rpms/libindicator/raw/f$(rpm --eval '%{?fedora}')/f/libindicator.spec" -o ./libindicator.spec
+        patch -p1 ./libindicator.spec ./patches/libindicator-16.10.0.patch
+        dnf builddep -y --spec ./libindicator.spec
+        rpmbuild --nodebuginfo -bb ./libindicator.spec
+
+    - name: Build unity-shell
+      run: |
+        rpm -ivh "$(rpm --eval '%{_rpmdir}')"/*/*.rpm
+        dnf builddep -y --spec ./unity-shell.spec
+        rpmbuild --nodebuginfo -bb ./unity-shell.spec
 
     - name: Upload RPMs
       if: success() || failure()
       uses: actions/upload-artifact@v3.1.0
       with:
           name: Built-RPMS
-          path: ~/rpmbuild/RPMS/x86_64/*
+          path: ~/rpmbuild/RPMS/*/*

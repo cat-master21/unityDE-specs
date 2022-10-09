@@ -17,7 +17,7 @@ Unity shell which had only been done [once before a long time ago](https://githu
 * [X] grail-devel
 * [X] frame-devel
 * [X] gsettings-ubuntu-touch-schemas-devel
-* [] ido-devel
+* [X] ido-devel
 #### related to Unity but not needed (especially non devel)
 * [X] libunity
 * [] xpathselect
