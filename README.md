@@ -1,5 +1,4 @@
 # Unity shell RPM specs
-**In this repositories current state, Unity is not able to fully build, however much progress has been made.**
 
 This repository contains all the RPM spec files needed for
 Unity shell which had only been done [once before a long time ago](https://github.com/chenxiaolong/Unity-for-Fedora). Something that is different is this uses [Unity 7.6](https://gitlab.com/ubuntu-unity/unity/unity) which is a fork that is maintained and used by [Ubuntu Unity](https://ubuntuunity.org/). The RPM specs are tested and used on the latest stable version of Fedora.
