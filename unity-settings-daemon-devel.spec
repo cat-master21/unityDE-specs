@@ -1,3 +1,5 @@
+%global source_date_epoch_from_changelog 0
+
 Name:           unity-settings-daemon-devel
 Version:        15.04.1+21.10.20220802
 #Uses Ubuntu's version as it is maintianed
@@ -8,7 +10,6 @@ License:        GPLv2 AND LGPLv2+
 URL:            https://launchpad.net/unity-settings-daemon
 Source0:        http://archive.ubuntu.com/ubuntu/pool/universe/u/unity-settings-daemon/unity-settings-daemon_%{version}.orig.tar.gz
 Patch0:         http://archive.ubuntu.com/ubuntu/pool/universe/u/unity-settings-daemon/unity-settings-daemon_%{version}-0ubuntu1.diff.gz
-%global source_date_epoch_from_changelog 0
 
 BuildRequires: automake libtool gnome-common
 BuildRequires: intltool
@@ -75,16 +76,15 @@ The settings daemon used in Unity 7. It is based on GNOME Settings Daemon 3.8.6.
 %patch0 -p1
 
 %build
+export LDFLAGS='-Wl,-O1 -Wl,-z,defs -Wl,--warn-unresolved-symbols -Wl,--as-needed'
+
 NOCONFIGURE=1 \
 ./autogen.sh
 
-sed -i '18d' ./plugins/Makefile.am
-
 %configure --disable-static --enable-packagekit --enable-ibus --enable-fcitx --enable-network-manager
 
-sed -i 's/libexec_PROGRAMS = usd-test-keyboard//g' ./plugins/keyboard/Makefile.am
-
 %make_build
+
 
 %install
 %make_install
@@ -98,7 +98,10 @@ sed -i 's/^.//' ./files.txt
 sed -i 's/\.1$/.1.gz/' ./files.txt
 sed -i 's/libunity-settings-daemon.so.1.gz$/libunity-settings-daemon.so.1/' ./files.txt
 
+
 %files -f files.txt
 %license COPYING COPYING.LIB
 
+
 %changelog
+
