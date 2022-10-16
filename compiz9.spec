@@ -1,10 +1,13 @@
+%global source_date_epoch_from_changelog 0
+%define _ubuntu_rel 22.10.20220822-0ubuntu1
+
 Name:           compiz9
 License:        GPLv2+ AND LGPLv2+ AND MIT
 Version:        0.9.14.2
 Release:        1
-Summary:        OpenGL window and compositing manager 0.9 series
+Summary:        OpenGL window and compositing manager 0.9.X.X series
 URL:            https://launchpad.net/compiz
-Source0:        %{url}/0.9.14/%{version}/+download/compiz-%{version}.tar.xz
+Source0:        http://archive.ubuntu.com/ubuntu/pool/universe/c/compiz/compiz_%{version}+%{_ubuntu_rel}.tar.xz
 
 Conflicts:     compiz
 BuildRequires: libX11-devel
@@ -54,8 +57,6 @@ Requires:      xorg-x11-server-Xorg
 Requires:      metacity
 Requires:      glx-utils
 
-%global source_date_epoch_from_changelog 0
-
 %package ccsm9
 Summary: Compiz Config Manager
 Conflicts: ccsm
@@ -68,7 +69,7 @@ Compiz Config Manager helps configure Compiz Window Manager, version 0.9 series
 Compiz 9 branch, which is newer then what Fedora packages and required by Unity 7.6 and higher.
 
 %prep
-%setup -q -n compiz-%{version}
+%setup -q -n compiz
 
 %build
 %cmake -DCOMPIZ_DISABLE_GS_SCHEMAS_INSTALL=OFF -DBUILD_GTK=On -DBUILD_METACITY=On -DCOMPIZ_BUILD_TESTING=Off -DBUILD_GLES=ON -DCOMPIZ_PACKAGING_ENABLED=TRUE -DBUILD_XORG_GTEST=OFF -DCOMPIZ_BUILD_WITH_RPATH=FALSE -DCOMPIZ_WERROR=Off
@@ -97,7 +98,7 @@ ln -sf usr/share/cmake-*/* usr/share/cmake/Modules
 popd
 
 pushd %{buildroot}/usr
-find . ! -type d -exec ls {} + | grep -v ccm | grep -v ccsm | grep -v ccm | grep -v python > %{_builddir}/compiz-%{version}/files.txt
+find . ! -type d -exec ls {} + | grep -v ccm | grep -v ccsm | grep -v ccm | grep -v python > %{_builddir}/compiz/files.txt
 popd
 
 sed -i s/^\.\\/// ./files.txt
@@ -122,3 +123,4 @@ sed -i 'sn^n%{_usr}/n' ./files.txt
 %{python3_sitearch}/*
 
 %changelog
+

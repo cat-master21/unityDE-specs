@@ -90,7 +90,9 @@ NOCONFIGURE=1 \
 %make_install
 rm -fv %{buildroot}%{_libdir}/unity-settings-daemon-1.0/*.la %{buildroot}%{_libdir}/*.la
 
+
 pushd %{buildroot}
+ln -s usr/libexec/unity-settings-daemon usr/bin/unity-settings-daemon
 find . ! -type d -exec ls {} + > %{_builddir}/unity-settings-daemon-%{version}/files.txt
 popd
 
