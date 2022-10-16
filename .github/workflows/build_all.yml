@@ -31,7 +31,7 @@ jobs:
         spectool -R -g ./gtk3.spec
         rpmbuild --nodebuginfo -bb ./gtk3.spec
         rm -f "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu-tests* "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu-devel-docs* "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk-update-icon-cache* "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu-immodule*
-        rpm -ivh "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu*
+        dnf install -y "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu*
 
     - name: Build xpathselect-devel
       run: |
@@ -106,7 +106,7 @@ jobs:
 
     - name: Build unity-shell
       run: |
-        rpm -ivh "$(rpm --eval '%{_rpmdir}')"/*/*.rpm
+        dnf install -y "$(rpm --eval '%{_rpmdir}')"/*/*.rpm
         dnf builddep -y --spec ./unity-shell.spec
         rpmbuild --nodebuginfo -bb ./unity-shell.spec
 
