@@ -28,6 +28,7 @@ jobs:
         curl "https://src.fedoraproject.org/rpms/gtk3/raw/f$(rpm --eval '%{?fedora}')/f/gtk3.spec" -o ./gtk3.spec
         patch -p1 ./gtk3.spec ./patches/gtk3-ubuntu.patch
         dnf builddep -y --spec ./gtk3.spec
+        spectool -R -g ./gtk3.spec
         rpmbuild --nodebuginfo -bb ./gtk3.spec
         rm -f "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu-tests* "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu-devel-docs* "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk-update-icon-cache* "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu-immodule*
         rpm -ivh "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu*
