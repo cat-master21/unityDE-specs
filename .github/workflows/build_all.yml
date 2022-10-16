@@ -115,6 +115,11 @@ jobs:
         dnf builddep -y --spec ./unity-session.spec
         rpmbuild --nodebuginfo -bb ./unity-session.spec
 
+    - name: Build unity-asset-pool
+      run: |
+        dnf builddep -y --spec ./unity-asset-pool.spec
+        rpmbuild --nodebuginfo -bb ./unity-asset-pool.spec
+
     - name: Upload RPMs
       if: success() || failure()
       uses: actions/upload-artifact@v3.1.0

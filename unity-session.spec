@@ -41,7 +41,7 @@ rm -rf %{buildroot}/usr/share/doc
 
 mkdir -p %{buildroot}%{_libexecdir}
 # Is needed for xsession but is in gnome-bin. Still noarch as it is a shellscript
-install -m755 %{SOURCE1} %{buildroot}%{_libexecdir}/run-systemd-session
+install -p -m755 %{SOURCE1} %{buildroot}%{_libexecdir}/run-systemd-session
 
 pushd %{buildroot}
 find . ! -type d -exec ls {} + > %{_builddir}/%{name}-%{version}/files.txt
