@@ -34,7 +34,7 @@ jobs:
 
     - name: Build virtual
       run: |
-        gem install --silent fpm
+        sudo gem install -q fpm
         chmod +x ./scripts/*.sh
         bash ./generate-virtual.sh
         mkdir -p ~/rpmbuild/RPMS/noarch/
