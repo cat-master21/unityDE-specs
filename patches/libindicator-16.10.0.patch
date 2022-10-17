@@ -1,5 +1,5 @@
 diff --git a/libindicator.spec b/libindicator.spec
-index 174d093..c122bc3 100644
+index 174d093..c1ab783 100644
 --- a/libindicator.spec
 +++ b/libindicator.spec
 @@ -1,13 +1,13 @@
@@ -19,6 +19,15 @@ index 174d093..c122bc3 100644
  
  BuildRequires:	chrpath
  BuildRequires:	gtk-doc
+@@ -16,7 +16,7 @@ BuildRequires:	pkgconfig
+ 
+ BuildRequires:	dbus-glib-devel
+ BuildRequires:	gtk2-devel
+-BuildRequires:	gtk3-devel
++BuildRequires:	gtk3-ubuntu-devel
+ 
+ BuildRequires:	gnome-common
+ BuildRequires: make
 @@ -79,29 +79,14 @@ tools for the GTK+3 build of %{name}.
  
  

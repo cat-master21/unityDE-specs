@@ -31,7 +31,15 @@ jobs:
         spectool -R -g ./gtk3.spec
         rpmbuild --nodebuginfo -bb ./gtk3.spec
         rm -f "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu-tests* "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu-devel-docs* "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk-update-icon-cache* "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu-immodule*
-        dnf install -y "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu*
+
+    - name: Build virtual
+      run: |
+        gem install --silent fpm
+        chmod +x ./scripts/*.sh
+        bash ./generate-virtual.sh
+        mkdir -p ~/rpmbuild/RPMS/noarch/
+        mv gtk3*.rpm ~/rpmbuild/RPMS/noarch/
+        dnf install -y "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu* ~/rpmbuild/RPMS/noarch/*.rpm
 
     - name: Build xpathselect-devel
       run: |
