@@ -36,7 +36,7 @@ jobs:
       run: |
         sudo gem install -q fpm
         chmod +x ./scripts/*.sh
-        bash ./generate-virtual.sh
+        bash ./scripts/generate-virtual.sh
         mkdir -p ~/rpmbuild/RPMS/noarch/
         mv gtk3*.rpm ~/rpmbuild/RPMS/noarch/
         dnf install -y "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu* ~/rpmbuild/RPMS/noarch/*.rpm
