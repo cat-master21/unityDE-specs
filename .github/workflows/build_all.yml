@@ -99,8 +99,8 @@ jobs:
 
     - name: Build libindicator
       run: |
-        curl "https://src.fedoraproject.org/rpms/libindicator/raw/f$(rpm --eval '%{?fedora}')/f/libindicator.spec" -o ./libindicator.spec
-        patch -p1 ./libindicator.spec ./patches/libindicator-16.10.0.patch
+        curl "https://src.fedoraproject.org/rpms/libindicator/raw/rawhide/f/libindicator.spec" -o ./libindicator.spec
+        patch ./libindicator.spec -i ./patches/libindicator-16.10.0.patch
         dnf builddep -y --spec ./libindicator.spec
         rpmbuild --nodebuginfo -bb ./libindicator.spec
 
