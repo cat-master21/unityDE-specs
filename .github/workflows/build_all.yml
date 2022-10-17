@@ -109,6 +109,7 @@ jobs:
       run: |
         curl "https://src.fedoraproject.org/rpms/libindicator/raw/rawhide/f/libindicator.spec" -o ./libindicator.spec
         patch ./libindicator.spec -i ./patches/libindicator-16.10.0.patch
+        spectool -R -g ./libindicator.spec
         dnf builddep -y --spec ./libindicator.spec
         rpmbuild --nodebuginfo -bb ./libindicator.spec
 
