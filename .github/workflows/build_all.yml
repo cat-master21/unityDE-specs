@@ -12,7 +12,7 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Install dependencies
-      run: dnf install -y curl rpmdevtools rpm-build dnf-utils rubygems
+      run: dnf install -y curl rpmdevtools rpm-build dnf-utils rubygems ruby-devel
 
     - name: Download RPMs
       run: |
@@ -34,9 +34,9 @@ jobs:
 
     - name: Build virtual
       run: |
-        gem install --silent fpm
+        sudo gem install -q fpm
         chmod +x ./scripts/*.sh
-        bash ./generate-virtual.sh
+        bash ./scripts/generate-virtual.sh
         mkdir -p ~/rpmbuild/RPMS/noarch/
         mv gtk3*.rpm ~/rpmbuild/RPMS/noarch/
         dnf install -y "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu* ~/rpmbuild/RPMS/noarch/*.rpm
@@ -110,6 +110,7 @@ jobs:
       run: |
         curl "https://src.fedoraproject.org/rpms/libindicator/raw/rawhide/f/libindicator.spec" -o ./libindicator.spec
         patch ./libindicator.spec -i ./patches/libindicator-16.10.0.patch
+        spectool -R -g ./libindicator.spec
         dnf builddep -y --spec ./libindicator.spec
         rpmbuild --nodebuginfo -bb ./libindicator.spec
 
