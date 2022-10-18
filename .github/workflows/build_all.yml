@@ -104,6 +104,7 @@ jobs:
       run: |
         dnf builddep -y --spec ./ido-devel.spec
         rpmbuild --nodebuginfo -bb ./ido-devel.spec
+        sudo dnf install -y "$(rpm --eval '%{_rpmdir}')"/x86_64/ido-devel*.rpm
 
     - name: Build libindicator
       run: |
