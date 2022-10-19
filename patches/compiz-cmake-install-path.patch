@@ -1,0 +1,22 @@
+diff --git a/cmake/base.cmake b/cmake/base.cmake
+index db4683c..cfc5b90 100644
+--- a/cmake/base.cmake
++++ b/cmake/base.cmake
+@@ -20,7 +20,7 @@ function (_check_compiz_cmake_macro)
+ 	     ${CMAKE_CURRENT_SOURCE_DIR}/cmake/FindCompiz.cmake
+ 	     ${CMAKE_CURRENT_SOURCE_DIR}/cmake/FindOpenGLES2.cmake
+ 	     DESTINATION
+-	     ${CMAKE_INSTALL_PREFIX}/share/cmake-${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}/)
++	     ${CMAKE_INSTALL_PREFIX}/share/cmake/Modules/)
+     add_custom_target (findcompiz_install
+ 	${CMAKE_COMMAND} -E make_directory ${CMAKE_ROOT}/Modules &&
+ 	${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/cmake/FindCompiz.cmake ${CMAKE_ROOT}/Modules &&
+@@ -30,7 +30,7 @@ function (_check_compiz_cmake_macro)
+     install (FILES
+ 	     ${CMAKE_CURRENT_SOURCE_DIR}/compizconfig/libcompizconfig/cmake/FindCompizConfig.cmake
+ 	     DESTINATION
+-	     ${CMAKE_INSTALL_PREFIX}/share/cmake-${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}/)
++	     ${CMAKE_INSTALL_PREFIX}/share/cmake/Modules/)
+     add_custom_target (
+ 	findcompizconfig_install
+ 	${CMAKE_COMMAND} -E make_directory ${CMAKE_ROOT}/Modules &&
