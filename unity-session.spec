@@ -14,7 +14,7 @@ BuildArch:	noarch
 
 BuildRequires: binutils
 BuildRequires: zstd
-Requires:      dbus-tools #For run-systemd-session and effectively xsession to start it.
+Requires:      dbus-tools
 Requires:      unity-shell
 Requires:      unity-settings-daemon-devel
 Recommends:    lightdm
