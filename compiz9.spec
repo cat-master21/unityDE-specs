@@ -8,6 +8,7 @@ Release:        1
 Summary:        OpenGL window and compositing manager 0.9.X.X series
 URL:            https://launchpad.net/compiz
 Source0:        http://archive.ubuntu.com/ubuntu/pool/universe/c/compiz/compiz_%{version}+%{_ubuntu_rel}.tar.xz
+Patch0:         https://raw.githubusercontent.com/cat-master21/unityDE-specs/fix-ci/patches/compiz-cmake-install-path.patch
 
 Conflicts:     compiz
 BuildRequires: libX11-devel
@@ -70,6 +71,7 @@ Compiz 9 branch, which is newer then what Fedora packages and required by Unity 
 
 %prep
 %setup -q -n compiz
+%patch0 -p1
 
 %build
 %cmake -DCOMPIZ_DISABLE_GS_SCHEMAS_INSTALL=OFF -DBUILD_GTK=On -DBUILD_METACITY=On -DCOMPIZ_BUILD_TESTING=Off -DBUILD_GLES=ON -DCOMPIZ_PACKAGING_ENABLED=TRUE -DBUILD_XORG_GTEST=OFF -DCOMPIZ_BUILD_WITH_RPATH=FALSE -DCOMPIZ_WERROR=Off
@@ -91,11 +93,6 @@ find %{buildroot} -name '*.a' -exec rm -f {} ';'
 # placeholder for local icons
 mkdir -p %{buildroot}%{_datadir}/compiz/icons/hicolor/{scalable/{apps,\
 categories},22x22/{categories,devices,mimetypes}}
-
-pushd %{buildroot}
-mkdir -p usr/share/cmake/Modules
-ln -sf usr/share/cmake-*/* usr/share/cmake/Modules
-popd
 
 pushd %{buildroot}/usr
 find . ! -type d -exec ls {} + | grep -v ccm | grep -v ccsm | grep -v ccm | grep -v python > %{_builddir}/compiz/files.txt

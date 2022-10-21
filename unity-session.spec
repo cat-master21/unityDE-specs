@@ -1,9 +1,9 @@
 %global source_date_epoch_from_changelog 0
-%define _ubuntu_rel 1ubuntu4
+%define _ubuntu_rel 1ubuntu2
 
 Name:    unity-session
 Summary: Lightdm profile for Unity 7
-Version: 42.0
+Version: 43.0
 Release: 1
 
 License: GPLv2
@@ -14,7 +14,7 @@ BuildArch:	noarch
 
 BuildRequires: binutils
 BuildRequires: zstd
-Requires:      dbus-tools #For run-systemd-session and effectively xsession to start it.
+Requires:      dbus-tools
 Requires:      unity-shell
 Requires:      unity-settings-daemon-devel
 Recommends:    lightdm

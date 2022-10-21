@@ -1,5 +1,5 @@
 diff --git a/libindicator.spec b/libindicator.spec
-index 174d093..c122bc3 100644
+index 174d093..334683d 100644
 --- a/libindicator.spec
 +++ b/libindicator.spec
 @@ -1,13 +1,13 @@
@@ -19,6 +19,20 @@ index 174d093..c122bc3 100644
  
  BuildRequires:	chrpath
  BuildRequires:	gtk-doc
+@@ -16,10 +16,10 @@ BuildRequires:	pkgconfig
+ 
+ BuildRequires:	dbus-glib-devel
+ BuildRequires:	gtk2-devel
+-BuildRequires:	gtk3-devel
+-
++BuildRequires:	gtk3-ubuntu-devel
++Requires:      ido-devel
+ BuildRequires:	gnome-common
+-BuildRequires: make
++BuildRequires:  make
+ 
+ %description
+ A set of symbols and convenience functions that all Ayatana indicators are
 @@ -79,29 +79,14 @@ tools for the GTK+3 build of %{name}.
  
  
