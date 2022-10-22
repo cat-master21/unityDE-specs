@@ -8,7 +8,7 @@ Release:        1
 Summary:        OpenGL window and compositing manager 0.9.X.X series
 URL:            https://launchpad.net/compiz
 Source0:        http://archive.ubuntu.com/ubuntu/pool/universe/c/compiz/compiz_%{version}+%{_ubuntu_rel}.tar.xz
-Patch0:         https://raw.githubusercontent.com/cat-master21/unityDE-specs/fix-ci/patches/compiz-cmake-install-path.patch
+Patch0:         https://raw.githubusercontent.com/cat-master21/unityDE-specs/main/patches/compiz-cmake-install-path.patch
 
 Conflicts:     compiz
 BuildRequires: libX11-devel
