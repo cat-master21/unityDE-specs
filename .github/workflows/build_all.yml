@@ -14,7 +14,7 @@ jobs:
     - name: Install dependencies
       run: dnf install -y curl rpmdevtools rpm-build dnf-utils rubygems ruby-devel
 
-    - name: Download RPMs
+    - name: Download RPM Sources
       run: |
         rpmdev-setuptree
         for i in ./*.spec
