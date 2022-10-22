@@ -1,7 +1,7 @@
 %global source_date_epoch_from_changelog 0
 %define _ubuntu_rel 0ubuntu3
 
-Name:    unity-aset-pool
+Name:    unity-asset-pool
 Summary: Assets for Unity 7
 Version: 0.8.24+17.10.20170507
 Release: 1
