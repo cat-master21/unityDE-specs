@@ -19,9 +19,8 @@ jobs:
         rpmdev-setuptree
         for i in ./*.spec
         do
-        spectool -R -g $i 2> /dev/null &
+        spectool -R -g $i 2> /dev/null
         done
-        wait
 
     - name: Build gtk3-ubuntu
       run: |
