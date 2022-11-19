@@ -26,7 +26,7 @@ jobs:
     - name: Build gtk3-ubuntu
       run: |
         curl "https://src.fedoraproject.org/rpms/gtk3/raw/f$(rpm --eval '%{?fedora}')/f/gtk3.spec" -o ./gtk3.spec
-        patch -p1 ./gtk3.spec ./patches/gtk3-ubuntu.patch
+        patch -p1 ./gtk3.spec -i ./patches/gtk3-ubuntu.patch
         dnf builddep -y --spec ./gtk3.spec
         spectool -R -g ./gtk3.spec
         rpmbuild --nodebuginfo -bb ./gtk3.spec
