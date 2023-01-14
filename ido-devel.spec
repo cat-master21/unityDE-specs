@@ -18,13 +18,13 @@ BuildRequires: libX11-devel
 BuildRequires: libXi-devel
 BuildRequires: asciidoc
 BuildRequires: gobject-introspection-devel
-BuildRequires: gtk3-ubuntu-devel
+BuildRequires: gtk3-devel
 BuildRequires: gtest-devel
 BuildRequires: gtk-doc
 BuildRequires: vala
 Requires:      gobject-introspection
 Requires:      libX11
-Requires:      gtk3-ubuntu
+Requires:      gtk3
 
 %description
 Widgets and other objects used for indicators.

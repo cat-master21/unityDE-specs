@@ -15,9 +15,9 @@ BuildRequires:  libX11-devel
 BuildRequires:  gnome-common
 BuildRequires:  gtk-doc
 BuildRequires:  libX11-devel
-BuildRequires:  gtk3-ubuntu-devel
+BuildRequires:  gtk3-devel
 BuildRequires:  glib2-devel
-Requires:       gtk3-ubuntu
+Requires:       gtk3
 Requires:       libX11
 
 %description
