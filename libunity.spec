@@ -14,6 +14,7 @@ Patch0001:  https://launchpadlibrarian.net/443817430/0001-Fix-FTB-with-recent-va
 Patch2:  https://src.fedoraproject.org/rpms/libunity/raw/rawhide/f/libunity-7.1.4-vala-053.patch
 
 BuildRequires: automake libtool gnome-common
+BuildRequires: which
 BuildRequires: intltool
 BuildRequires: pkgconfig(dee-1.0)
 BuildRequires: pkgconfig(dbusmenu-glib-0.4)
