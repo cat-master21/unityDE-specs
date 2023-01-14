@@ -4,9 +4,9 @@ Release:        1
 Summary:        An OpenGL toolkit
 
 License:        GPLv3+ AND LGPLv3+ AND LGPLv2+
-URL:            https://launchpad.net/nux
-Source0:        http://archive.ubuntu.com/ubuntu/pool/universe/n/nux/nux_4.0.8+18.10.20180623.orig.tar.gz
-Patch0:         http://archive.ubuntu.com/ubuntu/pool/universe/n/nux/nux_4.0.8+18.10.20180623-0ubuntu4.diff.gz
+URL:            https://gitlab.com/ubuntu-unity/unity-x/nux
+Source0:        %{url}/nux/-/archive/main/nux-main.tar.gz
+#Patch0:         http://archive.ubuntu.com/ubuntu/pool/universe/n/nux/nux_4.0.8+18.10.20180623-0ubuntu4.diff.gz
 %global source_date_epoch_from_changelog 0
 
 BuildRequires: automake libtool gnome-common
@@ -58,7 +58,7 @@ Visual rendering toolkit for real-time applications.
 
 %prep
 %setup -q -c
-%patch0 -p1
+#patch0 -p1
 for i in debian/patches/*.patch; do patch -p1 < $i; done
 
 %build
