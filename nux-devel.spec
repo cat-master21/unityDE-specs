@@ -59,6 +59,8 @@ Visual rendering toolkit for real-time applications.
 
 %prep
 %setup -q -n nux-main
+# Add missing m4 macros for docs
+tar -xf '%{SOURCE1}'
 #patch0 -p1
 #for i in debian/patches/*.patch; do patch -p1 < $i; done
 
