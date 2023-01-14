@@ -63,7 +63,13 @@ Visual rendering toolkit for real-time applications.
 tar -xf '%{SOURCE1}'
 #patch0 -p1
 #for i in debian/patches/*.patch; do patch -p1 < $i; done
+# Properly find doxygen-include.am
 sed -i 's!doxygen-include.am!$(top_srcdir)/doxygen-include.am!' ./Makefile.am
+
+# This subdir fails because it requires glew
+#sed -i 's/examples//' Makefile.am
+# Why is there a binary file here?
+rm examples/line-separator.o
 
 %build
 NOCONFIGURE=1 \
