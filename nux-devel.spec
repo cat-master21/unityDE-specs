@@ -92,7 +92,7 @@ export PYTHON
 rm -fv %{buildroot}%{_libdir}/*.la %{buildroot}%{python3_sitearch}/*.la
 
 pushd %{buildroot}/usr
-find . ! -type d -exec ls {} + > %{_builddir}/%{name}-main/files.txt
+find . ! -type d -exec ls {} + > %{_builddir}/nux-main/files.txt
 popd
 
 sed -i s/^\.\\/// ./files.txt
