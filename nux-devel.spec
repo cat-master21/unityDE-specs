@@ -73,7 +73,7 @@ PYTHON=%{__python3}
 export PYTHON
 
 %configure \
-  --enable-documentation=yes --enable-opengles-20 \
+  --enable-documentation=no --enable-opengles-20 \
   --disable-silent-rules \
   --disable-static
 
