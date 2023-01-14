@@ -63,6 +63,7 @@ Visual rendering toolkit for real-time applications.
 tar -xf '%{SOURCE1}'
 #patch0 -p1
 #for i in debian/patches/*.patch; do patch -p1 < $i; done
+sed -i 's!doxygen-include.am!$(top_srcdir)/doxygen-include.am!' ./Makefile.am
 
 %build
 NOCONFIGURE=1 \
