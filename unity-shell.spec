@@ -7,8 +7,8 @@ Release:        1
 Summary:        Unity7 is a shell that sings
 
 License:        GPLv3+
-URL:            https://gitlab.com/ubuntu-unity/unity/unity
-Source0:        %{url}/-/archive/master/unity-master.tar.gz
+URL:            https://gitlab.com/ubuntu-unity/unity-x/unityx
+Source0:        %{url}/-/archive/main/unityx-main.tar.gz
 
 BuildRequires: cmake
 BuildRequires: g++
@@ -113,7 +113,7 @@ keyboard and mouse events automatically. This package also contains the bindings
 needed for writing automated tests in Python.
 
 %prep
-%setup -q -n unity-master
+%setup -q -n unityx-main
 
 %build
 %cmake -DUNITY_PROTOCOL_PRIVATE_LIB=%{_libdir}/libunity -DCOMPIZ_BUILD_WITH_RPATH=FALSE -DCOMPIZ_PACKAGING_ENABLED=TRUE -DCOMPIZ_PLUGIN_INSTALL_TYPE=package -DUSE_GSETTINGS=TRUE
