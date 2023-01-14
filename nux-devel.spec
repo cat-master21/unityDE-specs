@@ -6,6 +6,7 @@ Summary:        An OpenGL toolkit
 License:        GPLv3+ AND LGPLv3+ AND LGPLv2+
 URL:            https://gitlab.com/ubuntu-unity/unity-x/nux
 Source0:        %{url}/-/archive/main/nux-main.tar.gz
+Source1:        https://raw.githubusercontent.com/cat-master21/unityDE-specs/unityx/patches/nux-m4.tar.gz
 #Patch0:         http://archive.ubuntu.com/ubuntu/pool/universe/n/nux/nux_4.0.8+18.10.20180623-0ubuntu4.diff.gz
 %global source_date_epoch_from_changelog 0
 
@@ -69,6 +70,7 @@ PYTHON=%{__python3}
 export PYTHON
 
 %configure \
+  --enable-documentation=yes --enable-opengles-20 \
   --disable-silent-rules \
   --disable-static
 
