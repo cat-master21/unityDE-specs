@@ -23,23 +23,22 @@ jobs:
         done
         wait
 
-    - name: Build gtk3-ubuntu
-      run: |
-        curl "https://src.fedoraproject.org/rpms/gtk3/raw/f$(rpm --eval '%{?fedora}')/f/gtk3.spec" -o ./gtk3.spec
-        patch -p1 ./gtk3.spec -i ./patches/gtk3-ubuntu.patch
-        dnf builddep -y --spec ./gtk3.spec
-        spectool -R -g ./gtk3.spec
-        rpmbuild --nodebuginfo -bb ./gtk3.spec
-        rm -f "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu-tests* "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu-devel-docs* "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk-update-icon-cache* "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu-immodule*
+#    - name: Build gtk3-ubuntu
+#      run: |
+#        patch -p1 ./gtk3.spec -i ./patches/gtk3-ubuntu.patch
+#        dnf builddep -y --spec ./gtk3.spec
+#        spectool -R -g ./gtk3.spec
+#        rpmbuild --nodebuginfo -bb ./gtk3.spec
+#        rm -f "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu-tests* "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu-devel-docs* "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk-update-icon-cache* "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu-immodule*
 
-    - name: Build virtual
-      run: |
-        sudo gem install -q fpm
-        chmod +x ./scripts/*.sh
-        bash ./scripts/generate-virtual.sh
-        mkdir -p ~/rpmbuild/RPMS/noarch/
-        mv gtk3*.rpm ~/rpmbuild/RPMS/noarch/
-        dnf install -y "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu* ~/rpmbuild/RPMS/noarch/*.rpm
+#    - name: Build virtual
+#      run: |
+#        sudo gem install -q fpm
+#        chmod +x ./scripts/*.sh
+#        bash ./scripts/generate-virtual.sh
+#        mkdir -p ~/rpmbuild/RPMS/noarch/
+#        mv gtk3*.rpm ~/rpmbuild/RPMS/noarch/
+#        dnf install -y "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu* ~/rpmbuild/RPMS/noarch/*.rpm
 
     - name: Build xpathselect-devel
       run: |
