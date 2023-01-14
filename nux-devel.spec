@@ -59,7 +59,7 @@ Visual rendering toolkit for real-time applications.
 %prep
 %setup -q -n nux-main
 #patch0 -p1
-for i in debian/patches/*.patch; do patch -p1 < $i; done
+#for i in debian/patches/*.patch; do patch -p1 < $i; done
 
 %build
 NOCONFIGURE=1 \
