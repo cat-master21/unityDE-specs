@@ -5,7 +5,7 @@ Summary:        An OpenGL toolkit
 
 License:        GPLv3+ AND LGPLv3+ AND LGPLv2+
 URL:            https://gitlab.com/ubuntu-unity/unity-x/nux
-Source0:        %{url}/nux/-/archive/main/nux-main.tar.gz
+Source0:        %{url}/-/archive/main/nux-main.tar.gz
 #Patch0:         http://archive.ubuntu.com/ubuntu/pool/universe/n/nux/nux_4.0.8+18.10.20180623-0ubuntu4.diff.gz
 %global source_date_epoch_from_changelog 0
 
@@ -57,7 +57,7 @@ Requires:      geis-devel
 Visual rendering toolkit for real-time applications.
 
 %prep
-%setup -q -c
+%setup -q -n nux-main
 #patch0 -p1
 for i in debian/patches/*.patch; do patch -p1 < $i; done
 
