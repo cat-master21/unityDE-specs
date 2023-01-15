@@ -31,7 +31,8 @@ BuildRequires: boost-devel
 BuildRequires: python3-devel
 BuildRequires: chrpath
 BuildRequires: systemd-rpm-macros
-Requires:      pam
+BuildRequires: pkgconfig(libstartup-notification-1.0)
+BuildRequires: pkgconfig(unity-protocol-private)
 Requires:      unity-asset-pool
 Requires:      libunity-misc-devel
 Requires:      nux-devel
@@ -39,7 +40,7 @@ Requires:      geis-devel
 Requires:      unity-settings-daemon-devel
 Requires:      unity-gtk-module-common
 Requires:      libindicator-gtk3
-# For default config
+# For default configuration
 Requires:      blueman
 Requires:      network-manager-applet
 Requires:      xfce4-panel
@@ -99,7 +100,6 @@ Summary:	Automatic testing for Unity
 Group:		Development/Tools
 
 BuildArch:	noarch
-
 Requires:	%{name} = %{version}-%{release}
 
 %description autopilot
@@ -111,7 +111,7 @@ needed for writing automated tests in Python.
 %setup -q -n unityx-main
 
 %build
-%cmake -DUSE_GSETTINGS=TRUE -DENABLE_X_SUPPORT=ON
+%cmake -DENABLE_X_SUPPORT=ON
 
 %cmake_build
 

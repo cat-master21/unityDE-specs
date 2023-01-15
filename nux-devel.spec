@@ -52,9 +52,9 @@ sed -i 's!doxygen-include.am!$(top_srcdir)/doxygen-include.am!' ./Makefile.am
 # This subdir fails because it requires glew
 #sed -i 's/examples//' Makefile.am
 
-# Why is there a binary files here?
-# This is extremelyy problematic
-rm ./*/*.o
+# Why are there binary files here?
+# This is very problematic for packaging
+rm -f ./*/*.o
 
 %build
 NOCONFIGURE=1 \

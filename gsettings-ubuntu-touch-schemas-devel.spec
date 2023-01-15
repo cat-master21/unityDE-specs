@@ -1,4 +1,4 @@
-Name:           gsettings-ubuntu-touch-schemas-devel
+Name:           gsettings-ubuntu-touch-schemas
 Version:        0.0.7+21.10.20210712
 Release:        1
 Summary:        Shared GSettings schemas for Ubuntu touch settings
@@ -19,32 +19,29 @@ Requires:      glib2
 
 %description
 gsettings-ubuntu-touch-schemas contains a collection of GSettings schemas for
-settings shared by various components of an Ubuntu environment.
+settings shared by various components of a Ubuntu environment.
 
 %prep
-%setup -q -c
+%autosetup -c
 
 %build
 NOCONFIGURE=1 \
 ./autogen.sh
 
 %configure
-
 %make_build
 
 %install
 %make_install
 rm -fv %{buildroot}%{_libdir}/*.la
 
-pushd %{buildroot}/usr
-find . ! -type d -exec ls {} + > %{_builddir}/%{name}-%{version}/files.txt
-popd
-
-sed -i s/^\.\\/// ./files.txt
-sed -i 'sn^n%{_usr}/n' ./files.txt
-
-%files -f files.txt
+%files
 %license COPYING
+%{_datarootdir}/accountsservice/interfaces/*.xml
+%{_datarootdir}/dbus-1/interfaces/*.xml
+%{_datarootdir}/glib-2.0/schemas/*.xml
+%{_datarootdir}/pkgconfig/gsettings-unity-schemas.pc
+%{_datarootdir}/polkit-1/actions/com.ubuntu.AccountsService.policy
 %{_sharedstatedir}/polkit-1/localauthority/10-vendor.d/50-com.ubuntu.AccountsService.pkla
 
 %changelog

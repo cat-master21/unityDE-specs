@@ -127,7 +127,6 @@ popd
 	done
 )
 
-
 # Ubuntu doesn't package the dummy indicator
 #rm -f %{buildroot}%{_libdir}/libdummy-indicator*.so
 
@@ -137,8 +136,8 @@ find %{buildroot} -type f -name '*.la' -delete
 %ldconfig_scriptlets
 %ldconfig_scriptlets gtk3
 
-
 %files
+%license COPYING
 %doc AUTHORS COPYING NEWS ChangeLog
 %{_libdir}/libindicator.so.*
 %dir %{_datadir}/libindicator/

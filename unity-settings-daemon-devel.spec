@@ -42,36 +42,15 @@ BuildRequires: librsvg2-devel
 BuildRequires: libXtst-devel
 BuildRequires: PackageKit-glib-devel
 BuildRequires: NetworkManager-libnm-devel
-Requires:      NetworkManager-libnm
-Requires:      PackageKit-glib
-Requires:      libXtst
-Requires:      librsvg2
-Requires:      xorg-x11-drv-wacom
-Requires:      libwacom
-Requires:      colord
-Requires:      upower
-Requires:      libXrandr
-Requires:      alsa-lib
-Requires:      libcanberra
-Requires:      pulseaudio-libs
-Requires:      gnome-desktop3
-Requires:      fcitx-libs
-Requires:      xkeyboard-config
-Requires:      libxkbfile
-Requires:      accountsservice
-Requires:      libgudev
-Requires:      libnotify
-Requires:      gperf
-Requires:      lcms2
-Requires:      gsettings-ubuntu-touch-schemas-devel
+BuildRequires: gsettings-ubuntu-touch-schemas
+Requires:      gsettings-ubuntu-touch-schemas
 Requires:      gsettings-desktop-schemas
 
 %description
-The settings daemon used in Unity 7. It is based on GNOME Settings Daemon 3.8.6.1.
+The settings daemon used in Unity. It is based on GNOME Settings Daemon 3.8.6.1.
 
 %prep
-%setup -q -n unity-settings-daemon-%{version}
-%patch0 -p1
+%autosetup -p1 -n unity-settings-daemon-%{version}
 
 %build
 export LDFLAGS='-Wl,-O1 -Wl,-z,defs -Wl,--warn-unresolved-symbols -Wl,--as-needed'

@@ -45,10 +45,10 @@ jobs:
 #        dnf builddep -y --spec ./xpathselect-devel.spec
 #        rpmbuild --nodebuginfo -bb ./xpathselect-devel.spec
 
-#    - name: Build libunity
-#      run: |
-#        dnf builddep -y --spec ./libunity.spec
-#        rpmbuild --nodebuginfo -bb ./libunity.spec
+    - name: Build libunity
+      run: |
+        dnf builddep -y --spec ./libunity.spec
+        rpmbuild --nodebuginfo -bb ./libunity.spec
 
     - name: Build libunity-misc-devel
       run: |
