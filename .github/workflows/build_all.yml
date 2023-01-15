@@ -89,14 +89,14 @@ jobs:
         dnf builddep -y --spec ./nux-devel.spec
         rpmbuild --nodebuginfo -bb ./nux-devel.spec
 
-    - name: Build gsettings-ubuntu-touch-schemas-devel
+    - name: Build gsettings-ubuntu-touch-schemas
       run: |
-        dnf builddep -y --spec ./gsettings-ubuntu-touch-schemas-devel.spec
-        rpmbuild --nodebuginfo -bb ./gsettings-ubuntu-touch-schemas-devel.spec
+        dnf builddep -y --spec ./gsettings-ubuntu-touch-schemas.spec
+        rpmbuild --nodebuginfo -bb ./gsettings-ubuntu-touch-schemas.spec
 
     - name: Build unity-settings-daemon-devel
       run: |
-        rpm -ivh "$(rpm --eval '%{_rpmdir}')"/*/gsettings-ubuntu-touch-schemas-devel*
+        rpm -ivh "$(rpm --eval '%{_rpmdir}')"/*/gsettings-ubuntu-touch-schemas*
         dnf builddep -y --spec ./unity-settings-daemon-devel.spec
         rpmbuild --nodebuginfo -bb ./unity-settings-daemon-devel.spec
 
