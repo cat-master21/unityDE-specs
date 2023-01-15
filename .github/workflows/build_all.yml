@@ -84,6 +84,7 @@ jobs:
 
     - name: Build nux-devel
       run: |
+        dnf install -y 'pkgconfig(glu)'
         rpm -ivh "$(rpm --eval '%{_rpmdir}')"/*/geis-devel* "$(rpm --eval '%{_rpmdir}')"/*/glewmx-devel*
         dnf builddep -y --spec ./nux-devel.spec
         rpmbuild --nodebuginfo -bb ./nux-devel.spec
