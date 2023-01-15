@@ -1,4 +1,3 @@
-%global source_date_epoch_from_changelog 0
 %define _ubuntu_rel 22.10.20220822-0ubuntu1
 
 Name:           compiz9
@@ -120,4 +119,4 @@ sed -i 'sn^n%{_usr}/n' ./files.txt
 %{python3_sitearch}/*
 
 %changelog
-
+%autochangelog

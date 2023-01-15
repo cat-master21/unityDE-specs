@@ -6,7 +6,6 @@ Summary:        Implements a subset of the XPath spec
 License:        GPLv3+
 URL:            https://launchpad.net/xpathselect
 Source0:        http://archive.ubuntu.com/ubuntu/pool/universe/x/xpathselect/xpathselect_1.4+15.10.20150824.1.orig.tar.gz
-%global source_date_epoch_from_changelog 0
 
 BuildRequires:  cmake
 BuildRequires:  g++
@@ -36,3 +35,4 @@ sed -i 's/^add_subdirectory(test)//' ./CMakeLists.txt
 %{_libdir}/pkgconfig/xpathselect.pc
 
 %changelog
+%autochangelog

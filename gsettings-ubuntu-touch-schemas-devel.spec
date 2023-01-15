@@ -6,7 +6,6 @@ Summary:        Shared GSettings schemas for Ubuntu touch settings
 License:        GPLv2 AND LGPLv2+
 URL:            https://launchpad.net/gsettings-ubuntu-touch-schemas
 Source0:        http://archive.ubuntu.com/ubuntu/pool/main/g/gsettings-ubuntu-touch-schemas/gsettings-ubuntu-touch-schemas_%{version}.orig.tar.gz
-%global source_date_epoch_from_changelog 0
 
 BuildRequires: automake libtool gnome-common
 BuildRequires: intltool
@@ -49,3 +48,4 @@ sed -i 'sn^n%{_usr}/n' ./files.txt
 %{_sharedstatedir}/polkit-1/localauthority/10-vendor.d/50-com.ubuntu.AccountsService.pkla
 
 %changelog
+%autochangelog

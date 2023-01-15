@@ -7,7 +7,6 @@ License:        GPLv3+ AND LGPLv3+
 URL:            https://launchpad.net/geis
 Source0:        http://archive.ubuntu.com/ubuntu/pool/universe/g/geis/geis_2.2.17+16.04.20160126.orig.tar.gz
 Patch0:         http://archive.ubuntu.com/ubuntu/pool/universe/g/geis/geis_2.2.17+16.04.20160126-0ubuntu8.diff.gz
-%global source_date_epoch_from_changelog 0
 
 BuildRequires: automake libtool gnome-common
 BuildRequires: intltool
@@ -57,3 +56,4 @@ sed -i 's/libgeis.so.1.gz$/libgeis.so.1/' ./files.txt
 %license COPYING COPYING.GPL
 
 %changelog
+%autochangelog

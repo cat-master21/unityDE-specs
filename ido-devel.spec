@@ -7,7 +7,6 @@ License:        LGPLv3+ AND LGPLv2+
 URL:            https://launchpad.net/ido
 Source0:        http://archive.ubuntu.com/ubuntu/pool/universe/i/ido/ido_%{version}+17.04.20161028.orig.tar.gz
 Patch0:         http://archive.ubuntu.com/ubuntu/pool/universe/i/ido/ido_%{version}+17.04.20161028-0ubuntu3.diff.gz
-%global source_date_epoch_from_changelog 0
 
 BuildRequires: automake libtool gnome-common
 BuildRequires: intltool
@@ -63,3 +62,4 @@ sed -i 'sn^n%{_usr}/n' ./files.txt
 %license COPYING COPYING.LGPL.2.1
 
 %changelog
+%autochangelog

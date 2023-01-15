@@ -7,7 +7,6 @@ License:        GPLv3+
 URL:            https://launchpad.net/frame
 Source0:        http://archive.ubuntu.com/ubuntu/pool/universe/f/frame/frame_2.5.0daily13.06.05+16.10.20160809.orig.tar.gz
 Patch0:         http://archive.ubuntu.com/ubuntu/pool/universe/f/frame/frame_2.5.0daily13.06.05+16.10.20160809-0ubuntu3.diff.gz
-%global source_date_epoch_from_changelog 0
 
 BuildRequires: automake libtool gnome-common
 BuildRequires: intltool
@@ -56,3 +55,4 @@ sed -i 's/frame-test-x11.1/frame-test-x11.1.gz/' ./files.txt
 %license COPYING COPYING.GPL3
 
 %changelog
+%autochangelog

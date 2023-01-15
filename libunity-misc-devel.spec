@@ -6,7 +6,6 @@ Summary:        Misc Unity shell libs
 License:        LGPLv2+
 URL:            https://launchpad.net/libunity-misc
 Source0:        http://archive.ubuntu.com/ubuntu/pool/universe/libu/libunity-misc/libunity-misc_4.0.5+14.04.20140115.orig.tar.gz
-%global source_date_epoch_from_changelog 0
 
 BuildRequires:  make
 BuildRequires:  g++
@@ -52,3 +51,4 @@ rm -fv %{buildroot}%{_libdir}/lib*.la
 %{_includedir}/unity-misc/unity-misc/gnome-bg-slideshow.h
 
 %changelog
+%autochangelog

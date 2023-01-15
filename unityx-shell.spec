@@ -1,7 +1,6 @@
-%global source_date_epoch_from_changelog 0
 %define __python /usr/bin/python3
 
-Name:           unity-shell
+Name:           unityx-shell
 Version:        1.7.6
 Release:        1
 Summary:        Unity7 is a shell that sings
@@ -10,6 +9,7 @@ License:        GPLv3+
 URL:            https://gitlab.com/ubuntu-unity/unity-x/unityx
 Source0:        %{url}/-/archive/main/unityx-main.tar.gz
 
+Provides:      unity-shell
 BuildRequires: cmake
 BuildRequires: g++
 BuildRequires: gcc
@@ -313,4 +313,4 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{python3_sitelib}/unity/tests/xim/__pycache__/**
 
 %changelog
-
+%autochangelog

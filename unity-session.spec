@@ -1,4 +1,3 @@
-%global source_date_epoch_from_changelog 0
 %define _ubuntu_rel 1ubuntu2
 
 Name:    unity-session
@@ -48,10 +47,8 @@ find . ! -type d -exec ls {} + > %{_builddir}/%{name}-%{version}/files.txt
 popd
 sed -i 'sX^./X/X' ./files.txt
 
-
 %files -f files.txt
 %license COPYING
 
-
 %changelog
-
+%autochangelog

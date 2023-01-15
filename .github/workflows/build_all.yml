@@ -29,7 +29,7 @@ jobs:
 #        dnf builddep -y --spec ./gtk3.spec
 #        spectool -R -g ./gtk3.spec
 #        rpmbuild --nodebuginfo -bb ./gtk3.spec
-#        rm -f "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu-tests* "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu-devel-docs* "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk-update-icon-cache* "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu-immodule*
+#        rm -f "$(rpm --eval '%{_rpmdir}')"/*/gtk3-ubuntu-tests* "$(rpm --eval '%{_rpmdir}')"/*/gtk3-ubuntu-devel-docs* "$(rpm --eval '%{_rpmdir}')"/*/gtk-update-icon-cache* "$(rpm --eval '%{_rpmdir}')"/*/gtk3-ubuntu-immodule*
 
 #    - name: Build virtual
 #      run: |
@@ -38,7 +38,7 @@ jobs:
 #        bash ./scripts/generate-virtual.sh
 #        mkdir -p ~/rpmbuild/RPMS/noarch/
 #        mv gtk3*.rpm ~/rpmbuild/RPMS/noarch/
-#        dnf install -y "$(rpm --eval '%{_rpmdir}')"/x86_64/gtk3-ubuntu* ~/rpmbuild/RPMS/noarch/*.rpm
+#        dnf install -y "$(rpm --eval '%{_rpmdir}')"/*/gtk3-ubuntu* ~/rpmbuild/RPMS/noarch/*.rpm
 
     - name: Build xpathselect-devel
       run: |
@@ -67,13 +67,13 @@ jobs:
 
     - name: Build grail-devel
       run: |
-        rpm -ivh "$(rpm --eval '%{_rpmdir}')"/x86_64/frame-devel*
+        rpm -ivh "$(rpm --eval '%{_rpmdir}')"/*/frame-devel*
         dnf builddep -y --spec ./grail-devel.spec
         rpmbuild --nodebuginfo -bb ./grail-devel.spec
 
     - name: Build geis-devel
       run: |
-        rpm -ivh "$(rpm --eval '%{_rpmdir}')"/x86_64/grail-devel*
+        rpm -ivh "$(rpm --eval '%{_rpmdir}')"/*/grail-devel*
         dnf builddep -y --spec ./geis-devel.spec
         rpmbuild --nodebuginfo -bb ./geis-devel.spec
 
@@ -84,7 +84,7 @@ jobs:
 
     - name: Build nux-devel
       run: |
-        rpm -ivh "$(rpm --eval '%{_rpmdir}')"/x86_64/geis-devel* "$(rpm --eval '%{_rpmdir}')"/x86_64/glewmx-devel*
+        rpm -ivh "$(rpm --eval '%{_rpmdir}')"/*/geis-devel* "$(rpm --eval '%{_rpmdir}')"/*/glewmx-devel*
         dnf builddep -y --spec ./nux-devel.spec
         rpmbuild --nodebuginfo -bb ./nux-devel.spec
 
@@ -95,7 +95,7 @@ jobs:
 
     - name: Build unity-settings-daemon-devel
       run: |
-        rpm -ivh "$(rpm --eval '%{_rpmdir}')"/x86_64/gsettings-ubuntu-touch-schemas-devel*
+        rpm -ivh "$(rpm --eval '%{_rpmdir}')"/*/gsettings-ubuntu-touch-schemas-devel*
         dnf builddep -y --spec ./unity-settings-daemon-devel.spec
         rpmbuild --nodebuginfo -bb ./unity-settings-daemon-devel.spec
 
@@ -103,25 +103,22 @@ jobs:
 #      run: |
 #        dnf builddep -y --spec ./ido-devel.spec
 #        rpmbuild --nodebuginfo -bb ./ido-devel.spec
-#        sudo dnf install -y "$(rpm --eval '%{_rpmdir}')"/x86_64/ido-devel*.rpm
+#        sudo dnf install -y "$(rpm --eval '%{_rpmdir}')"/*/ido-devel*.rpm
 
     - name: Build libindicator
       run: |
-        curl "https://src.fedoraproject.org/rpms/libindicator/raw/rawhide/f/libindicator.spec" -o ./libindicator.spec
-        patch ./libindicator.spec -i ./patches/libindicator-16.10.0.patch
-        spectool -R -g ./libindicator.spec
         dnf builddep -y --spec ./libindicator.spec
         rpmbuild --nodebuginfo -bb ./libindicator.spec
 
-    - name: Build unity-shell
+    - name: Build unityx-shell
       run: |
         dnf install -y "$(rpm --eval '%{_rpmdir}')"/*/*.rpm
-        dnf builddep -y --spec ./unity-shell.spec
-        rpmbuild --nodebuginfo -bb ./unity-shell.spec
+        dnf builddep -y --spec ./unityx-shell.spec
+        rpmbuild --nodebuginfo -bb ./unityx-shell.spec
 
     - name: Build unity-session
       run: |
-        dnf install -y "$(rpm --eval '%{_rpmdir}')"/*/unity-shell*.rpm
+        dnf install -y "$(rpm --eval '%{_rpmdir}')"/*/unityx-shell*.rpm
         dnf builddep -y --spec ./unity-session.spec
         rpmbuild --nodebuginfo -bb ./unity-session.spec
 

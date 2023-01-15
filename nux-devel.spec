@@ -8,7 +8,6 @@ URL:            https://gitlab.com/ubuntu-unity/unity-x/nux
 Source0:        %{url}/-/archive/main/nux-main.tar.gz
 Source1:        https://raw.githubusercontent.com/cat-master21/unityDE-specs/unityx/patches/nux-m4.tar.gz
 #Patch0:         http://archive.ubuntu.com/ubuntu/pool/universe/n/nux/nux_4.0.8+18.10.20180623-0ubuntu4.diff.gz
-%global source_date_epoch_from_changelog 0
 
 BuildRequires: automake libtool gnome-common
 BuildRequires: intltool
@@ -34,24 +33,7 @@ BuildRequires: libXdamage-devel
 BuildRequires: pciutils-devel
 BuildRequires: glib2-devel
 BuildRequires: ibus-devel
-Requires:      glib2
-Requires:      pciutils
-Requires:      libXdamage
-Requires:      libXcomposite
 Requires:      glewmx-devel
-Requires:      pcre
-Requires:      libXinerama
-Requires:      libXxf86vm
-Requires:      glew
-Requires:      mesa-libGLU
-Requires:      libglvnd
-Requires:      libpng
-Requires:      libXext
-Requires:      libX11
-Requires:      libsigc++20
-Requires:      cairo
-Requires:      pango
-Requires:      ibus
 Requires:      geis-devel
 
 %description
@@ -103,3 +85,4 @@ sed -i 's/\.1$/.1.gz/' ./files.txt
 %license COPYING COPYING.gpl COPYING.lgpl-v2.1
 
 %changelog
+%autochangelog

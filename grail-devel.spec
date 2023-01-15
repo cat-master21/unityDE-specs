@@ -6,7 +6,6 @@ Summary:        Gesture Recognition And Instantiation Library
 License:        GPLv3+
 URL:            https://launchpad.net/grail
 Source0:        http://archive.ubuntu.com/ubuntu/pool/universe/g/grail/grail_3.1.1.orig.tar.bz2
-%global source_date_epoch_from_changelog 0
 
 BuildRequires: automake libtool gnome-common
 BuildRequires: intltool
@@ -56,3 +55,4 @@ sed -i 's/\.1$/.1.gz/' ./files.txt
 %license COPYING COPYING.GPL3
 
 %changelog
+%autochangelog

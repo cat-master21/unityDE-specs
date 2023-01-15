@@ -7,7 +7,6 @@ License:        GPLv3+
 URL:            https://launchpad.net/ubuntu/+source/glewmx
 Source0:        http://archive.ubuntu.com/ubuntu/pool/universe/g/glewmx/glewmx_%{version}.orig.tar.gz
 Source1:        http://archive.ubuntu.com/ubuntu/pool/universe/g/glewmx/glewmx_%{version}-5.debian.tar.xz
-%global source_date_epoch_from_changelog 0
 
 BuildRequires: make
 BuildRequires: gcc
@@ -48,3 +47,4 @@ sed -i 'sn^n%{_usr}/n' ./files.txt
 %license LICENSE.txt
 
 %changelog
+%autochangelog

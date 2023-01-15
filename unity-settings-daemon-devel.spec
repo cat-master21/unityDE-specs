@@ -1,5 +1,3 @@
-%global source_date_epoch_from_changelog 0
-
 Name:           unity-settings-daemon-devel
 Version:        15.04.1+21.10.20220802
 #Uses Ubuntu's version as it is maintianed
@@ -82,9 +80,7 @@ NOCONFIGURE=1 \
 ./autogen.sh
 
 %configure --disable-static --enable-packagekit --enable-ibus --enable-fcitx --enable-network-manager
-
 %make_build
-
 
 %install
 %make_install
@@ -101,10 +97,9 @@ sed -i 's/^.//' ./files.txt
 sed -i 's/\.1$/.1.gz/' ./files.txt
 sed -i 's/libunity-settings-daemon.so.1.gz$/libunity-settings-daemon.so.1/' ./files.txt
 
-
 %files -f files.txt
 %license COPYING COPYING.LIB
 
 
 %changelog
-
+%autochangelog
