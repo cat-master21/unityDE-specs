@@ -23,32 +23,27 @@ BuildRequires: libindicator-gtk3-devel
 BuildRequires: json-glib-devel
 BuildRequires: libnotify-devel
 BuildRequires: libsigc++20-devel
-BuildRequires: libunity-devel
+#BuildRequires: xpathselect-devel
+#BuildRequires: libunity-devel
 BuildRequires: doxygen
 BuildRequires: pam-devel
 BuildRequires: boost-devel
 BuildRequires: python3-devel
 BuildRequires: chrpath
 BuildRequires: systemd-rpm-macros
-#Requires:	   unity-data
-#Requires:     unity-core
 Requires:      pam
+Requires:      unity-asset-pool
 Requires:      libunity-misc-devel
 Requires:      nux-devel
 Requires:      geis-devel
 Requires:      unity-settings-daemon-devel
-Requires:      libsigc++20
-Requires:      bamf
-Requires:      libnotify
-Requires:      gtk3
-Requires:      libstdc++
-Requires:      xpathselect-devel
-Requires:      libappstream-glib
-Requires:      zeitgeist
-Requires:      libunity
 Requires:      unity-gtk-module-common
-Requires:      compiz9
 Requires:      libindicator-gtk3
+# For default config
+Requires:      blueman
+Requires:      network-manager-applet
+Requires:      xfce4-panel
+Requires:      xfwm4
 
 %description
 Unity is a desktop experience that sings. Designed by Canonical and the Ayatana
@@ -116,7 +111,7 @@ needed for writing automated tests in Python.
 %setup -q -n unityx-main
 
 %build
-%cmake -DUNITY_PROTOCOL_PRIVATE_LIB=%{_libdir}/libunity -DCOMPIZ_BUILD_WITH_RPATH=FALSE -DCOMPIZ_PACKAGING_ENABLED=TRUE -DCOMPIZ_PLUGIN_INSTALL_TYPE=package -DUSE_GSETTINGS=TRUE
+%cmake -DUSE_GSETTINGS=TRUE -DENABLE_X_SUPPORT=ON
 
 %cmake_build
 

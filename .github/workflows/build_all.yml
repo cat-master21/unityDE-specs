@@ -40,25 +40,25 @@ jobs:
 #        mv gtk3*.rpm ~/rpmbuild/RPMS/noarch/
 #        dnf install -y "$(rpm --eval '%{_rpmdir}')"/*/gtk3-ubuntu* ~/rpmbuild/RPMS/noarch/*.rpm
 
-    - name: Build xpathselect-devel
-      run: |
-        dnf builddep -y --spec ./xpathselect-devel.spec
-        rpmbuild --nodebuginfo -bb ./xpathselect-devel.spec
+#    - name: Build xpathselect-devel
+#      run: |
+#        dnf builddep -y --spec ./xpathselect-devel.spec
+#        rpmbuild --nodebuginfo -bb ./xpathselect-devel.spec
 
-    - name: Build libunity
-      run: |
-        dnf builddep -y --spec ./libunity.spec
-        rpmbuild --nodebuginfo -bb ./libunity.spec
+#    - name: Build libunity
+#      run: |
+#        dnf builddep -y --spec ./libunity.spec
+#        rpmbuild --nodebuginfo -bb ./libunity.spec
 
     - name: Build libunity-misc-devel
       run: |
         dnf builddep -y --spec ./libunity-misc-devel.spec
         rpmbuild --nodebuginfo -bb ./libunity-misc-devel.spec
 
-    - name: Build compiz9
-      run: |
-        dnf builddep -y --spec ./compiz9.spec
-        rpmbuild --nodebuginfo -bb ./compiz9.spec
+#    - name: Build compiz9
+#      run: |
+#        dnf builddep -y --spec ./compiz9.spec
+#        rpmbuild --nodebuginfo -bb ./compiz9.spec
 
     - name: Build frame-devel
       run: |
@@ -116,16 +116,16 @@ jobs:
         dnf builddep -y --spec ./unityx-shell.spec
         rpmbuild --nodebuginfo -bb ./unityx-shell.spec
 
+    - name: Build unity-asset-pool
+      run: |
+        dnf builddep -y --spec ./unity-asset-pool.spec
+        rpmbuild --nodebuginfo -bb ./unity-asset-pool.spec
+
     - name: Build unity-session
       run: |
         dnf install -y "$(rpm --eval '%{_rpmdir}')"/*/unityx-shell*.rpm
         dnf builddep -y --spec ./unity-session.spec
         rpmbuild --nodebuginfo -bb ./unity-session.spec
-
-    - name: Build unity-asset-pool
-      run: |
-        dnf builddep -y --spec ./unity-asset-pool.spec
-        rpmbuild --nodebuginfo -bb ./unity-asset-pool.spec
 
     - name: Upload RPMs
       if: success() || failure()
