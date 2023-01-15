@@ -33,6 +33,7 @@ BuildRequires: libXdamage-devel
 BuildRequires: pciutils-devel
 BuildRequires: glib2-devel
 BuildRequires: ibus-devel
+BuildRequires: boost-devel
 Requires:      glewmx-devel
 Requires:      geis-devel
 
