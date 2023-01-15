@@ -26,7 +26,7 @@ index 174d093..334683d 100644
 -BuildRequires:	gtk3-devel
 -
 +BuildRequires:	gtk3-devel
-+Requires:      ido-devel
++#Requires:      ido-devel
  BuildRequires:	gnome-common
 -BuildRequires: make
 +BuildRequires:  make
