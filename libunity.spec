@@ -93,14 +93,13 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 %license COPYING*
 %{_bindir}/libunity-tool
 %{_bindir}/unity-scope-loader
-%{_libdir}/libunity.so.9*
-%{_libdir}/libunity-extras.so.9*
+%{_libdir}/libunity.so.*
+%{_libdir}/libunity-extras.so.*
 %{_libdir}/girepository-1.0/Unity-7.0.typelib
 %{_libdir}/girepository-1.0/UnityExtras-7.0.typelib
 %dir %{_libdir}/libunity/
 %{_libdir}/libunity/libunity-protocol-private.so
-%{_libdir}/libunity/libunity-protocol-private.so.0
-%{_libdir}/libunity/libunity-protocol-private.so.0.0.0
+%{_libdir}/libunity/libunity-protocol-private.so.*
 %{_datadir}/glib-2.0/schemas/com.canonical.Unity.Lenses.gschema.xml
 %{_datadir}/unity/
 %{_datadir}/unity-scopes/

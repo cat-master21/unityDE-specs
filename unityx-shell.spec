@@ -14,7 +14,7 @@ BuildRequires: cmake
 BuildRequires: g++
 BuildRequires: gcc
 BuildRequires: dee-devel
-BuildRequires: gnome-desktop3-devel
+BuildRequires: pkgconfig(gnome-desktop-3.0)
 BuildRequires: zeitgeist-devel
 BuildRequires: libappstream-glib-devel
 BuildRequires: libdbusmenu-devel
@@ -28,14 +28,13 @@ BuildRequires: libsigc++20-devel
 BuildRequires: doxygen
 BuildRequires: pam-devel
 BuildRequires: boost-devel
-BuildRequires: python3-devel
+BuildRequires: ppkgconfig(nux-4.0)
 BuildRequires: chrpath
 BuildRequires: systemd-rpm-macros
 BuildRequires: pkgconfig(libstartup-notification-1.0)
 BuildRequires: pkgconfig(unity-protocol-private)
 Requires:      unity-asset-pool
 Requires:      libunity-misc-devel
-Requires:      nux-devel
 Requires:      geis-devel
 Requires:      unity-settings-daemon-devel
 Requires:      unity-gtk-module-common
@@ -88,9 +87,9 @@ This package contains the development files the core Unity library.
 Summary:	Common files for the Unity shell
 Group:		User Interface/Desktops
 
-# For /usr/etc/pam.d/unity
+
 Recommends: gnome-keyring-pam
-Requires:	%{name}%{?_isa} = %{version}-%{release}
+Requires:   %{name}%{?_isa} = %{version}-%{release}
 
 %description data
 This package contains data (non-arch specific) files to Unity 7.
@@ -108,23 +107,13 @@ keyboard and mouse events automatically. This package also contains the bindings
 needed for writing automated tests in Python.
 
 %prep
-%setup -q -n unityx-main
+%autosetup -n unityx-main
 
 %build
 %cmake -DENABLE_X_SUPPORT=ON
-
 %cmake_build
 
-pushd tests/autopilot/
-%py3_build
-popd
-
 %install
-
-pushd tests/autopilot/
-%py3_install
-popd
-
 %cmake_install
 
 # Not the correct directory, /usr/etc/pam.d should be /etc/pam.d

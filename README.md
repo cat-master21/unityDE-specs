@@ -5,13 +5,13 @@ Unity shell which had only been done [once before a long time ago](https://githu
 
 ### RPM spec file progress:
 #### needed for Unity to build:
-* [X] xpathselect-devel
-* [X] libunity-devel
+* [X] ~~xpathselect-devel~~
+* [X] libunity
 * [X] libunity-misc-devel
 * [X] geis-devel
 * [X] glewmx-devel
 * [X] nux
-* [X] unity-settings-daemon-devel
+* [X] unity-settings-daemon
 * [X] ~~compiz9~~
 * [X] grail-devel
 * [X] frame-devel
