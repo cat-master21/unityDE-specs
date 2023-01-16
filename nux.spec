@@ -6,6 +6,7 @@ Summary:        An OpenGL toolkit
 License:        GPLv3+ AND LGPLv3+ AND LGPLv2+
 URL:            https://gitlab.com/ubuntu-unity/unity-x/nux
 Source0:        %{url}/-/archive/main/nux-main.tar.gz
+Source1:        https://raw.githubusercontent.com/cat-master21/unityDE-specs/unityx/patches/nux-m4.tar.gz
 
 BuildRequires: automake libtool gnome-common
 BuildRequires: intltool
@@ -46,6 +47,10 @@ Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %prep
 %autosetup -n nux-main
+# configure.ac errors without
+tar -xf '%{SOURCE1}'
+# Properly find doxygen-include.am
+sed -i 's!doxygen-include.am!$(top_srcdir)/doxygen-include.am!' ./Makefile.am
 # Why are there binary files here?
 # This is very problematic for packaging
 rm -f ./*/*.o
