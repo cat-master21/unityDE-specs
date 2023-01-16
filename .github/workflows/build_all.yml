@@ -82,12 +82,12 @@ jobs:
         dnf builddep -y --spec ./glewmx-devel.spec
         rpmbuild --nodebuginfo -bb ./glewmx-devel.spec
 
-    - name: Build nux-devel
+    - name: Build nux
       run: |
         dnf install -y 'pkgconfig(glu)'
         rpm -ivh "$(rpm --eval '%{_rpmdir}')"/*/geis-devel* "$(rpm --eval '%{_rpmdir}')"/*/glewmx-devel*
-        dnf builddep -y --spec ./nux-devel.spec
-        rpmbuild --nodebuginfo -bb ./nux-devel.spec
+        dnf builddep -y --spec ./nux.spec
+        rpmbuild --nodebuginfo -bb ./nux.spec
 
     - name: Build gsettings-ubuntu-touch-schemas
       run: |
@@ -111,26 +111,26 @@ jobs:
         dnf builddep -y --spec ./libindicator.spec
         rpmbuild --nodebuginfo -bb ./libindicator.spec
 
+    - name: Build unity-asset-pool
+      run: |
+        dnf builddep -y --spec ./unity-asset-pool.spec
+        rpmbuild --nodebuginfo -bb ./unity-asset-pool.spec
+
     - name: Build unityx-shell
       run: |
         dnf install -y "$(rpm --eval '%{_rpmdir}')"/*/*.rpm
         dnf builddep -y --spec ./unityx-shell.spec
         rpmbuild --nodebuginfo -bb ./unityx-shell.spec
 
-    - name: Build unity-asset-pool
-      run: |
-        dnf builddep -y --spec ./unity-asset-pool.spec
-        rpmbuild --nodebuginfo -bb ./unity-asset-pool.spec
-
-    - name: Build unity-session
-      run: |
-        dnf install -y "$(rpm --eval '%{_rpmdir}')"/*/unityx-shell*.rpm
-        dnf builddep -y --spec ./unity-session.spec
-        rpmbuild --nodebuginfo -bb ./unity-session.spec
+#    - name: Build unity-session
+#      run: |
+#        dnf install -y "$(rpm --eval '%{_rpmdir}')"/*/unityx-shell*.rpm
+#        dnf builddep -y --spec ./unity-session.spec
+#        rpmbuild --nodebuginfo -bb ./unity-session.spec
 
     - name: Upload RPMs
       if: success() || failure()
       uses: actions/upload-artifact@v3.1.0
       with:
-          name: Built-RPMS
+          name: x86_64-fedora-latest-RPMS
           path: ~/rpmbuild/RPMS/*/*

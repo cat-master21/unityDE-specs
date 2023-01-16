@@ -1,4 +1,4 @@
-Name:           nux-devel
+Name:           nux
 Version:        4.0.8
 Release:        1
 Summary:        An OpenGL toolkit
@@ -6,8 +6,6 @@ Summary:        An OpenGL toolkit
 License:        GPLv3+ AND LGPLv3+ AND LGPLv2+
 URL:            https://gitlab.com/ubuntu-unity/unity-x/nux
 Source0:        %{url}/-/archive/main/nux-main.tar.gz
-Source1:        https://raw.githubusercontent.com/cat-master21/unityDE-specs/unityx/patches/nux-m4.tar.gz
-#Patch0:         http://archive.ubuntu.com/ubuntu/pool/universe/n/nux/nux_4.0.8+18.10.20180623-0ubuntu4.diff.gz
 
 BuildRequires: automake libtool gnome-common
 BuildRequires: intltool
@@ -40,18 +38,14 @@ Requires:      geis-devel
 %description
 Visual rendering toolkit for real-time applications.
 
+%package devel
+Summary:  Development files for %{name}
+Requires: %{name}%{?_isa} = %{version}-%{release}
+%description devel
+%{summary}.
+
 %prep
-%setup -q -n nux-main
-# Add missing m4 macros for docs
-tar -xf '%{SOURCE1}'
-#patch0 -p1
-#for i in debian/patches/*.patch; do patch -p1 < $i; done
-# Properly find doxygen-include.am
-sed -i 's!doxygen-include.am!$(top_srcdir)/doxygen-include.am!' ./Makefile.am
-
-# This subdir fails because it requires glew
-#sed -i 's/examples//' Makefile.am
-
+%autosetup -n nux-main
 # Why are there binary files here?
 # This is very problematic for packaging
 rm -f ./*/*.o
@@ -73,17 +67,33 @@ export PYTHON
 %install
 %make_install
 rm -fv %{buildroot}%{_libdir}/*.la %{buildroot}%{python3_sitearch}/*.la
+mkdir -p %{buildroot}%{_sysconfdir}/X11/Xsession.d
+install -m 0644 debian/50_check_unity_support -t %{buildroot}%{_sysconfdir}/X11/Xsession.d
+# Not needed and out of place
+rm -rf %{buildroot}%{_datadir}/nux/gputests
 
-pushd %{buildroot}/usr
-find . ! -type d -exec ls {} + > %{_builddir}/nux-main/files.txt
-popd
-
-sed -i s/^\.\\/// ./files.txt
-sed -i 'sn^n%{_usr}/n' ./files.txt
-sed -i 's/\.1$/.1.gz/' ./files.txt
-
-%files -f files.txt
+%files
 %license COPYING COPYING.gpl COPYING.lgpl-v2.1
+%{_sysconfdir}/X11/Xsession.d/50_check_unity_support
+%{_libdir}/libnux-4.0.so.*
+%{_libdir}/libnux-core-4.0.so.*
+%{_libdir}/libnux-graphics-4.0.so.*
+%dir %{_libexecdir}/nux
+%{_libexecdir}/nux/unity_support_test
+%dir %{_datadir}/nux
+%dir %{_datadir}/nux/4.0
+%{_datadir}/nux/4.0/Fonts/
+%{_datadir}/nux/4.0/UITextures/
+
+%files devel
+%dir %{_includedir}/Nux-4.0
+%{_includedir}/Nux-4.0/Nux/
+%{_includedir}/Nux-4.0/NuxCore/
+%{_includedir}/Nux-4.0/NuxGraphics/
+%{_libdir}/libnux-4.0.so
+%{_libdir}/libnux-core-4.0.so
+%{_libdir}/libnux-graphics-4.0.so
+%{_libdir}/pkgconfig/*.pc
 
 %changelog
 %autochangelog

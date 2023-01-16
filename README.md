@@ -10,7 +10,7 @@ Unity shell which had only been done [once before a long time ago](https://githu
 * [X] libunity-misc-devel
 * [X] geis-devel
 * [X] glewmx-devel
-* [X] nux-devel
+* [X] nux
 * [X] unity-settings-daemon-devel
 * [X] ~~compiz9~~
 * [X] grail-devel
