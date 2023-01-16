@@ -94,11 +94,11 @@ jobs:
         dnf builddep -y --spec ./gsettings-ubuntu-touch-schemas.spec
         rpmbuild --nodebuginfo -bb ./gsettings-ubuntu-touch-schemas.spec
 
-    - name: Build unity-settings-daemon-devel
+    - name: Build unity-settings-daemon
       run: |
         rpm -ivh "$(rpm --eval '%{_rpmdir}')"/*/gsettings-ubuntu-touch-schemas*
-        dnf builddep -y --spec ./unity-settings-daemon-devel.spec
-        rpmbuild --nodebuginfo -bb ./unity-settings-daemon-devel.spec
+        dnf builddep -y --spec ./unity-settings-daemon.spec
+        rpmbuild --nodebuginfo -bb ./unity-settings-daemon.spec
 
 #    - name: Build ido-devel
 #      run: |
