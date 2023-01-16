@@ -18,6 +18,7 @@ Unity shell which had only been done [once before a long time ago](https://githu
 * [X] gsettings-ubuntu-touch-schemas
 * [X] ~~ido-devel~~
 #### related to Unity but not needed (especially non devel)
+* [X] vala-panel
 * [X] vala-panel-appmenu
 * [] unity-tweak-tool (from: https://github.com/freyja-dev/unity-tweak-tool and add later commits with patches and add Ubuntu font patch)
 * [] unity-control-center

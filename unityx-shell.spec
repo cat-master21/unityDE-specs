@@ -13,7 +13,8 @@ Provides:      unity-shell
 BuildRequires: cmake
 BuildRequires: g++
 BuildRequires: gcc
-BuildRequires: dee-devel
+BuildRequires: pkgconfig(dee-1.0)
+BuildRequires: pkgconfig(unity-settings-daemon)
 BuildRequires: pkgconfig(gnome-desktop-3.0)
 BuildRequires: zeitgeist-devel
 BuildRequires: libappstream-glib-devel
@@ -28,7 +29,7 @@ BuildRequires: libsigc++20-devel
 BuildRequires: doxygen
 BuildRequires: pam-devel
 BuildRequires: boost-devel
-BuildRequires: ppkgconfig(nux-4.0)
+BuildRequires: pkgconfig(nux-4.0)
 BuildRequires: chrpath
 BuildRequires: systemd-rpm-macros
 BuildRequires: pkgconfig(libstartup-notification-1.0)
@@ -36,10 +37,11 @@ BuildRequires: pkgconfig(unity-protocol-private)
 Requires:      unity-asset-pool
 Requires:      libunity-misc-devel
 Requires:      geis-devel
-Requires:      unity-settings-daemon-devel
+Requires:      unity-settings-daemon
 Requires:      unity-gtk-module-common
 Requires:      libindicator-gtk3
 # For default configuration
+Requires:      nemo
 Requires:      blueman
 Requires:      network-manager-applet
 Requires:      xfce4-panel
