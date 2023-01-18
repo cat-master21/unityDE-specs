@@ -15,6 +15,7 @@ BuildRequires: bamf-daemon
 BuildRequires: meson
 BuildRequires: ninja-build
 BuildRequires: gettext
+BuildRequires: cmake
 BuildRequires: vala
 BuildRequires: systemd-rpm-macros
 BuildRequires: pkgconfig(libxfce4panel-2.0)
