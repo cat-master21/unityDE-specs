@@ -38,13 +38,14 @@ Requires:      unity-asset-pool
 Requires:      libunity-misc-devel
 Requires:      geis-devel
 Requires:      unity-settings-daemon
-Requires:      unity-gtk-module-common
+Requires:      unity-gtk3-module
+Requires:      unity-gtk2-module
 Requires:      libindicator-gtk3
 # For default configuration
 Requires:      nemo
 Requires:      blueman
 Requires:      network-manager-applet
-Requires:      xfce4-panel
+Requires:      xfce4-vala-panel-appmenu-plugin
 Requires:      xfwm4
 
 %description
@@ -223,80 +224,6 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_sysconfdir}/compizconfig/unity.ini
 %{_userunitdir}/unity*.service
 %{_userunitdir}/unity*.target
-
-
-%files autopilot
-%doc AUTHORS ChangeLog HACKING README
-%license COPYING COPYING.LGPL
-%dir %{python3_sitelib}/unity-1.0-py%{python3_version}.egg-info/
-%{python3_sitelib}/unity-1.0-py%{python3_version}.egg-info/PKG-INFO
-%{python3_sitelib}/unity-1.0-py%{python3_version}.egg-info/SOURCES.txt
-%{python3_sitelib}/unity-1.0-py%{python3_version}.egg-info/dependency_links.txt
-%{python3_sitelib}/unity-1.0-py%{python3_version}.egg-info/top_level.txt
-# Tests
-%dir %{python3_sitelib}/unity/
-%{python3_sitelib}/unity/__init__.py*
-%dir %{python3_sitelib}/unity/emulators/
-%{python3_sitelib}/unity/emulators/__init__.py*
-%{python3_sitelib}/unity/emulators/dash.py*
-%{python3_sitelib}/unity/emulators/X11.py*
-%{python3_sitelib}/unity/emulators/compiz.py*
-%{python3_sitelib}/unity/emulators/ibus.py
-%{python3_sitelib}/unity/emulators/hud.py*
-%{python3_sitelib}/unity/emulators/icons.py*
-%{python3_sitelib}/unity/emulators/launcher.py*
-%{python3_sitelib}/unity/emulators/panel.py*
-%{python3_sitelib}/unity/emulators/quicklist.py*
-%{python3_sitelib}/unity/emulators/screen.py*
-%{python3_sitelib}/unity/emulators/shortcut_hint.py*
-%{python3_sitelib}/unity/emulators/switcher.py*
-%{python3_sitelib}/unity/emulators/tooltip.py*
-%{python3_sitelib}/unity/emulators/unity.py*
-%{python3_sitelib}/unity/emulators/window_manager.py*
-%{python3_sitelib}/unity/emulators/workspace.py*
-%dir %{python3_sitelib}/unity/tests/
-%{python3_sitelib}/unity/tests/__init__.py*
-%dir %{python3_sitelib}/unity/tests/launcher/
-%{python3_sitelib}/unity/tests/launcher/__init__.py*
-%{python3_sitelib}/unity/tests/test_gnome_key_grabber.py*
-%{python3_sitelib}/unity/tests/test_gobject_introspection.py*
-%{python3_sitelib}/unity/tests/test_search.py*
-%{python3_sitelib}/unity/tests/test_wm_keybindings.py*
-%{python3_sitelib}/unity/tests/launcher/test_capture.py*
-%{python3_sitelib}/unity/tests/launcher/test_icon_behavior.py*
-%{python3_sitelib}/unity/tests/launcher/test_keynav.py*
-%{python3_sitelib}/unity/tests/launcher/test_reveal.py*
-%{python3_sitelib}/unity/tests/launcher/test_shortcut.py*
-%{python3_sitelib}/unity/tests/launcher/test_switcher.py*
-%{python3_sitelib}/unity/tests/launcher/test_visual.py*
-%{python3_sitelib}/unity/tests/launcher/test_scroll.py*
-%{python3_sitelib}/unity/tests/launcher/test_tooltips.py*
-%{python3_sitelib}/unity/tests/test_command_lens.py*
-%{python3_sitelib}/unity/tests/test_dash.py*
-%{python3_sitelib}/unity/tests/test_home_lens.py*
-%{python3_sitelib}/unity/tests/test_hud.py*
-%{python3_sitelib}/unity/tests/test_ibus.py*
-%{python3_sitelib}/unity/tests/test_panel.py*
-%{python3_sitelib}/unity/tests/test_quicklist.py*
-%{python3_sitelib}/unity/tests/test_shopping_lens.py*
-%{python3_sitelib}/unity/tests/test_shortcut_hint.py*
-%{python3_sitelib}/unity/tests/test_showdesktop.py*
-%{python3_sitelib}/unity/tests/test_spread.py*
-%{python3_sitelib}/unity/tests/test_switcher.py*
-%{python3_sitelib}/unity/tests/test_unity_logging.py*
-%dir %{python3_sitelib}/unity/tests/xim/
-%{python3_sitelib}/unity/tests/xim/__init__.py*
-%{python3_sitelib}/unity/tests/xim/test_gcin.py*
-%dir %{python3_sitelib}/unity/__pycache__/
-%{python3_sitelib}/unity/__pycache__/**
-%dir %{python3_sitelib}/unity/emulators/__pycache__/
-%{python3_sitelib}/unity/emulators/__pycache__/**
-%dir %{python3_sitelib}/unity/tests/__pycache__/
-%{python3_sitelib}/unity/tests/__pycache__/**
-%dir %{python3_sitelib}/unity/tests/launcher/__pycache__/
-%{python3_sitelib}/unity/tests/launcher/__pycache__/**
-%dir %{python3_sitelib}/unity/tests/xim/__pycache__/
-%{python3_sitelib}/unity/tests/xim/__pycache__/**
 
 %changelog
 %autochangelog
