@@ -123,6 +123,7 @@ jobs:
 
     - name: Build vala-panel-appmenu
       run: |
+        rpm -ivh "$(rpm --eval '%{_rpmdir}')"/*/*.rpm
         dnf builddep -y --spec ./vala-panel-appmenu.spec
         rpmbuild --nodebuginfo -bb ./vala-panel-appmenu.spec
 
