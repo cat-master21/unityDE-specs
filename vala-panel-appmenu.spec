@@ -1,6 +1,5 @@
 %global forgeurl https://gitlab.com/vala-panel-project/vala-panel-appmenu
 %global commit 99cd56c1644fe4193854902c450e67f9a6685112
-
 %forgemeta
 
 Name:    vala-panel-appmenu
@@ -9,7 +8,7 @@ Release: 1%{?dist}
 License: LGPL-3.0+
 Summary: This package provides Application Menu plugin for vala-panel
 URL:     %{forgeurl}
-Source: %{forgesource}
+Source:  %{forgesource}
 
 BuildRequires: bamf-daemon
 BuildRequires: meson

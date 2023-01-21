@@ -1,6 +1,6 @@
 Name:           frame-devel
 Version:        2.5.0
-Release:        1
+Release:        1%{?dist}
 Summary:        Touch Frame Library
 
 License:        GPLv3+

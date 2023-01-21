@@ -1,13 +1,20 @@
+# Spectool has a bug where it can't download from https://gitlab.com/ubuntu-unity/unity-x/unityx
+%global forgeurl https://gitlab.com/cat-master21/unityx
+%global commit a43578fa78f12ff47bb4d7d88d373333cd4af532
+%forgemeta
+
 %define __python /usr/bin/python3
 
-Name:           unityx-shell
-Version:        1.7.6
-Release:        1
-Summary:        Unity7 is a shell that sings
+Name:          unityx-shell
+Version:       1.7.7
+Release:       1%{?dist}
+Summary:       Unity7 is a shell that sings
 
-License:        GPLv3+
-URL:            https://gitlab.com/ubuntu-unity/unity-x/unityx
-Source0:        %{url}/-/archive/main/unityx-main.tar.gz
+License:       GPLv3 AND LGPLv3
+URL:           %{forgeurl}
+Source0:       %{forgesource}
+Source1:       https://gitlab.xfce.org/panel-plugins/xfce4-windowck-plugin/-/raw/eeffa180d4b0828bcd4e9da0c504ac6524e1a0b4/configure.ac.in
+Source2:       https://gitlab.xfce.org/panel-plugins/xfce4-windowck-plugin/-/commit/dee596492f006d02e2b39abd072ddd7b37fefe82.diff
 
 Provides:      unity-shell
 BuildRequires: cmake
@@ -30,10 +37,21 @@ BuildRequires: doxygen
 BuildRequires: pam-devel
 BuildRequires: boost-devel
 BuildRequires: pkgconfig(nux-4.0)
-BuildRequires: chrpath
-BuildRequires: systemd-rpm-macros
+BuildRequires: gtk3-devel
 BuildRequires: pkgconfig(libstartup-notification-1.0)
 BuildRequires: pkgconfig(unity-protocol-private)
+
+# unityx-shell-xfce4-windowck-plugin
+BuildRequires: pkgconfig(libwnck-3.0)
+BuildRequires: pkgconfig(libxfconf-0)
+BuildRequires: pkgconfig(libxfce4util-1.0)
+BuildRequires: pkgconfig(libxfce4ui-2)
+BuildRequires: pkgconfig(libxfce4panel-2.0)
+BuildRequires: pkgconfig(gtk+-3.0)
+BuildRequires: xfce4-vala
+BuildRequires: xfce4-dev-tools
+
+Requires:      python3-pydbus
 Requires:      unity-asset-pool
 Requires:      libunity-misc-devel
 Requires:      geis-devel
@@ -41,7 +59,11 @@ Requires:      unity-settings-daemon
 Requires:      unity-gtk3-module
 Requires:      unity-gtk2-module
 Requires:      libindicator-gtk3
+Requires:      plotinus%{?_isa} = %{version}-%{release}
+Requires:      bamf-daemon
+Requires:      xbindkeys
 # For default configuration
+Requires:      %{name}-xfce4-windowck-plugin%{?_isa} = %{version}-%{release}
 Requires:      nemo
 Requires:      blueman
 Requires:      network-manager-applet
@@ -61,80 +83,96 @@ currently, Unity consists of a Compiz plugin based visual interface only, which
 is heavily dependent on OpenGL.
 
 
-%package core
+%package xfce4-windowck-plugin
 Summary:	Core library for the Unity shell
-Group:		System Environment/Libraries
 
-Requires:	%{name}-data = %{version}-%{release}
+Requires:	%{name}%{?_isa} = %{version}-%{release}
 
-%description core
+%description xfce4-windowck-plugin
 This package contains the core library needed for Unity and Unity 2D.
 
 
-%package core-devel
+%package devel
 Summary:	Development files for the core Unity library
-Group:		Development/Libraries
 
-Requires:	%{name}-core%{?_isa} = %{version}-%{release}
+Requires:	%{name}%{?_isa} = %{version}-%{release}
 Requires:	pkgconfig(dee-1.0)
 Requires:	pkgconfig(glib-2.0)
 Requires:	pkgconfig(sigc++-2.0)
 Requires:	pkgconfig(unity)
 Requires:	pkgconfig(nux-4.0)
 
-%description core-devel
+%description devel
 This package contains the development files the core Unity library.
 
 
-%package data
-Summary:	Common files for the Unity shell
-Group:		User Interface/Desktops
-
-
-Recommends: gnome-keyring-pam
-Requires:   %{name}%{?_isa} = %{version}-%{release}
-
-%description data
-This package contains data (non-arch specific) files to Unity 7.
-
-%package autopilot
+%package -n plotinus
 Summary:	Automatic testing for Unity
-Group:		Development/Tools
+Requires:	%{name}%{?_isa} = %{version}-%{release}
 
-BuildArch:	noarch
-Requires:	%{name} = %{version}-%{release}
-
-%description autopilot
+%description -n plotinus
 This package contains the autopilot framework, which allows for triggering
 keyboard and mouse events automatically. This package also contains the bindings
 needed for writing automated tests in Python.
 
 %prep
-%autosetup -n unityx-main
+%forgeautosetup
 
 %build
+# Wrong paths
+sed -i 's!lib/{arch}-linux-gnu!%{_lib}!' unityx/unityx
+sed -i 's!%{_lib}/bamf/bamfdaemon!libexec/bamf/bamfdaemon!' unityx/unityx
+sed -i 's!unity-settings-daemon!%{_libexecdir}/unity-settings-daemon!' unityx/unityx
+%py3_shebang_fix unityx/unityx
+
+# Fix invalid argument calling dbus-update-activation-environment
+sed -i 's/'--all', //' unityx/unityx
+
+# Remove rpath
+sed -i '/RPATH/d' UnityCore/CMakeLists.txt
+sed -i 's/SOVERSION ${CORE_LIB_LT_CURRENT}/SOVERSION ${CORE_LIB_LT_CURRENT})/' UnityCore/CMakeLists.txt
+
+# The caches again!!
+rm -fv unityx/windowck-plugin/po/.intltool-merge-cache*
+
 %cmake -DENABLE_X_SUPPORT=ON
 %cmake_build
+
+pushd unityx/plotinus
+# Wrong path again
+sed -i 's/LIBRARY DESTINATION lib/LIBRARY DESTINATION %{_lib}/' CMakeLists.txt
+%cmake
+%cmake_build
+popd
+
+pushd unityx/windowck-plugin
+cp %{SOURCE1} configure.ac.in
+# Fix the file missing and icons being blurry
+patch -i %{SOURCE2} -p1
+
+NOCONFIGURE=1 \
+./autogen.sh
+
+%configure --disable-static
+%make_build
+popd
 
 %install
 %cmake_install
 
-# Not the correct directory, /usr/etc/pam.d should be /etc/pam.d
-mv -f %{buildroot}%{_prefix}%{_sysconfdir}/* %{buildroot}%{_sysconfdir}
+pushd unityx/plotinus
+%cmake_install
+popd
 
-# Upstart init is dead a long time ago and there isn't any package that provides anything to do with it.
-rm -rf %{buildroot}%{_datarootdir}/upstart
+pushd unityx/windowck-plugin
+%make_install
+rm -fv %{buildroot}%{_libdir}/*.la
+popd
 
-%find_lang unity
-
-chrpath --delete $RPM_BUILD_ROOT%{_libdir}/compiz/libunityshell.so
-chrpath --delete $RPM_BUILD_ROOT%{_libdir}/compiz/libunitymtgrabhandles.so
-chrpath --delete $RPM_BUILD_ROOT%{_libdir}/libunity-core-6.0.so.9.0.0
-
-%py3_shebang_fix $RPM_BUILD_ROOT%{_libdir}/unity
+%find_lang unityx
+%find_lang xfce4-windowck-plugin
 
 %preun
-%gconf_schema_remove compiz-unitymtgrabhandles compiz-unityshell
 
 %postun
 if [ ${1} -eq 0 ]; then
@@ -144,86 +182,45 @@ fi
 %posttrans
 glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 
-
-%post core -p /sbin/ldconfig
-
-%postun core -p /sbin/ldconfig
-
-%files
-%doc AUTHORS ChangeLog HACKING README
+%files -f unityx.lang
+%doc AUTHORS ChangeLog INSTALL README.md
 %license COPYING COPYING.LGPL
-%{_bindir}/unity
-%dir %{_libdir}/compiz/
-%{_libdir}/compiz/libunitymtgrabhandles.so
-%{_libdir}/compiz/libunityshell.so
-%{_mandir}/man1/unity.1.gz
-%dir %{_libdir}/unity/
-%{_libdir}/unity/compiz-config-profile-setter
-%{_libdir}/unity/compiz-profile-selector
-%{_libdir}/unity/systemd-prestart-check
-%{_libdir}/unity/unity-panel-service
-%{_libdir}/unity/unity-active-plugins-safety-check
-%{_libdir}/unity/upstart-prestart-check
+%{_bindir}/unityx*
+%{_libdir}/libunityx-core-6.0.so.*
+%{_datadir}/glib-2.0/schemas/org.unityd.UnityX.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.unityd.UnityX.user-interface.gschema.xml
+%dir %{_datadir}/unityx
+%dir %{_datadir}/unityx/icons
+%{_datadir}/unityx/icons/dash-widgets.json
+%{_datadir}/unityx/icons/*.png
+%{_datadir}/unityx/icons/*.svg
+%{_datadir}/unityx/icons/searchingthedashlegalnotice.html
+%dir %{_datadir}/unityx/themes/
+%{_datadir}/unityx/themes/dash-widgets.json
+%{_datadir}/xsessions/unityx.desktop
 
-%files core
-%doc AUTHORS ChangeLog HACKING README
+%files -n plotinus
+%doc unityx/plotinus/README.md
 %license COPYING COPYING.LGPL
-%{_libdir}/libunity-core-6.0.so.9
-%{_libdir}/libunity-core-6.0.so.9.0.0
+%{_bindir}/plotinus
+%{_libdir}/libplotinus.so
+%{_datadir}/glib-2.0/schemas/org.unityd.UnityX.plotinus.gschema.xml
+
+%files devel
+%dir %{_includedir}/UnityX-6.0/UnityCore/
+%{_includedir}/UnityX-6.0/UnityCore/*.h
+%{_libdir}/libunityx-core-6.0.so
+%{_libdir}/pkgconfig/unityx-core-6.0.pc
 
 
-%files core-devel
-%doc AUTHORS ChangeLog HACKING README
-%license COPYING COPYING.LGPL
-%dir %{_includedir}/Unity-6.0/
-%dir %{_includedir}/Unity-6.0/UnityCore/
-%{_includedir}/Unity-6.0/UnityCore/*.h
-%{_libdir}/libunity-core-6.0.so
-%{_libdir}/pkgconfig/unity-core-6.0.pc
-
-
-%files data -f unity.lang
-%doc AUTHORS ChangeLog HACKING README
-%license COPYING COPYING.LGPL
-%{_libdir}/unity/makebootchart.py
-%{_mandir}/man1/unity-panel-service.1.gz
-%{_datadir}/ccsm/icons/hicolor/64x64/apps/plugin-unityshell.png
-%{_datadir}/glib-2.0/schemas/com.canonical.Unity.gschema.xml
-%{_datadir}/glib-2.0/schemas/org.compiz.unitymtgrabhandles.gschema.xml
-%{_datadir}/glib-2.0/schemas/org.compiz.unityshell.gschema.xml
-%dir %{_datadir}/unity/
-%dir %{_datadir}/unity/icons/
-%dir %{_datadir}/unity/themes/
-%{_datadir}/unity/icons/dash-widgets.json
-%{_datadir}/unity/icons/*.png
-%{_datadir}/unity/icons/*.svg
-%{_datadir}/unity/icons/searchingthedashlegalnotice.html
-%{_datadir}/unity/themes/dash-widgets.json
-%dir %{_datadir}/compiz/
-%dir %{_datadir}/compiz/unitymtgrabhandles/
-%dir %{_datadir}/compiz/unitymtgrabhandles/images/
-%{_datadir}/compiz/unitymtgrabhandles.xml
-%{_datadir}/compiz/unityshell.xml
-%{_datadir}/compiz/unitymtgrabhandles/images/handle-0.png
-%{_datadir}/compiz/unitymtgrabhandles/images/handle-1.png
-%{_datadir}/compiz/unitymtgrabhandles/images/handle-2.png
-%{_datadir}/compiz/unitymtgrabhandles/images/handle-3.png
-%{_datadir}/compiz/unitymtgrabhandles/images/handle-4.png
-%{_datadir}/compiz/unitymtgrabhandles/images/handle-5.png
-%{_datadir}/compiz/unitymtgrabhandles/images/handle-6.png
-%{_datadir}/compiz/unitymtgrabhandles/images/handle-7.png
-%{_datadir}/compiz/unitymtgrabhandles/images/handle-8.png
-%{_datadir}/gnome-control-center/keybindings/50-unity-launchers.xml
-%{_sysconfdir}/pam.d/unity
-%dir %{_datarootdir}/compizconfig/
-%dir %{_datarootdir}/compizconfig/upgrades/
-%{_datarootdir}/compizconfig/upgrades/*.upgrade
-%dir %{_sysconfdir}/compizconfig/
-%{_sysconfdir}/compizconfig/unity-lowgfx.ini
-%{_sysconfdir}/compizconfig/unity.conf
-%{_sysconfdir}/compizconfig/unity.ini
-%{_userunitdir}/unity*.service
-%{_userunitdir}/unity*.target
+%files xfce4-windowck-plugin -f xfce4-windowck-plugin.lang
+%doc unityx/windowck-plugin/AUTHORS unityx/windowck-plugin/NEWS unityx/windowck-plugin/README.md
+%license unityx/windowck-plugin/COPYING
+%{_libdir}/xfce4/panel/plugins/*.so
+%{_datadir}/icons/hicolor/48x48/apps/*.png
+%{_datadir}/themes/Windowck/
+%{_datadir}/themes/Windowck-dark/
+%{_datadir}/xfce4/panel/plugins/*.desktop
 
 %changelog
 %autochangelog

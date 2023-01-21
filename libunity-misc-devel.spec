@@ -1,6 +1,6 @@
 Name:           libunity-misc-devel
 Version:        1.4
-Release:        1
+Release:        1%{?dist}
 Summary:        Misc Unity shell libs
 
 License:        LGPLv2+

@@ -1,6 +1,6 @@
 Name:           gsettings-ubuntu-touch-schemas
 Version:        0.0.7+21.10.20210712
-Release:        1
+Release:        1%{?dist}
 Summary:        Shared GSettings schemas for Ubuntu touch settings
 
 License:        GPLv2 AND LGPLv2+

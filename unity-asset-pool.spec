@@ -1,7 +1,7 @@
 Name:    unity-asset-pool
 Summary: Assets and icons for Unity
 Version: 0.8.24
-Release: 1
+Release: 1%{?dist}
 
 License:   CC-BY-SA
 URL:       https://launchpad.net/unity-asset-pool

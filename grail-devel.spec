@@ -1,6 +1,6 @@
 Name:           grail-devel
 Version:        3.1.1
-Release:        1
+Release:        1%{?dist}
 Summary:        Gesture Recognition And Instantiation Library
 
 License:        GPLv3+

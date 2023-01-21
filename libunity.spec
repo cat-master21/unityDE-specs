@@ -1,7 +1,7 @@
 Name:    libunity
 Summary: Supporting library for Unity shell
 Version: 7.1.4
-Release: 1
+Release: 1%{?dist}
 
 License: GPLv3+ AND LGPLv3+
 URL:     https://launchpad.net/libunity

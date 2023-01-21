@@ -1,6 +1,6 @@
 Name:           xpathselect-devel
 Version:        1.4
-Release:        1
+Release:        1%{?dist}
 Summary:        Implements a subset of the XPath spec
 
 License:        GPLv3+

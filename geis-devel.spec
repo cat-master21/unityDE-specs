@@ -1,6 +1,6 @@
 Name:           geis-devel
 Version:        2.2.17
-Release:        1
+Release:        1%{?dist}
 Summary:        An implementation of the GEIS interface
 
 License:        GPLv3+ AND LGPLv3+

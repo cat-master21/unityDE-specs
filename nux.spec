@@ -1,12 +1,13 @@
 Name:           nux
 Version:        4.0.8
-Release:        1
+Release:        1%{?dist}
 Summary:        An OpenGL toolkit
 
 License:        GPLv3+ AND LGPLv3+ AND LGPLv2+
 URL:            https://gitlab.com/ubuntu-unity/unity-x/nux
 Source0:        %{url}/-/archive/main/nux-main.tar.gz
 Source1:        https://raw.githubusercontent.com/cat-master21/unityDE-specs/unityx/patches/nux-m4.tar.gz
+Patch0:         https://gitlab.com/unity-for-arch/nux/-/raw/main/add_setupframebufferobject_clear.patch
 
 BuildRequires: automake libtool gnome-common
 BuildRequires: intltool
@@ -46,14 +47,15 @@ Requires: %{name}%{?_isa} = %{version}-%{release}
 %{summary}.
 
 %prep
-%autosetup -n nux-main
+%autosetup -n nux-main -p1
 # configure.ac errors without
 tar -xf '%{SOURCE1}'
 # Properly find doxygen-include.am
 sed -i 's!doxygen-include.am!$(top_srcdir)/doxygen-include.am!' ./Makefile.am
 # Why are there binary files here?
-# This is very problematic for packaging
 rm -f ./*/*.o
+# Fix path
+sed -i 's!/usr/lib!%{_libexecdir}!' debian/50_check_unity_support
 
 %build
 NOCONFIGURE=1 \

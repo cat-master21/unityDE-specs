@@ -1,6 +1,6 @@
 Name:           ido-devel
 Version:        13.10.0
-Release:        1
+Release:        1%{?dist}
 Summary:        Indicators and Display Objects
 
 License:        LGPLv3+ AND LGPLv2+

@@ -1,6 +1,6 @@
 Name:           glewmx-devel
 Version:        1.13.0
-Release:        1
+Release:        1%{?dist}
 Summary:        OpenGL Extension Wrangler MX
 
 License:        GPLv3+

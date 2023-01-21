@@ -1,6 +1,6 @@
 Name:           unity-settings-daemon
 Version:        15.04.1+21.10.20220802
-Release:        1
+Release:        1%{?dist}
 Summary:        Daemon handling for Unity session settings
 
 License:        GPLv2 AND LGPLv2+
