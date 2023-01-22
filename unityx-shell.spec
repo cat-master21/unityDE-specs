@@ -15,6 +15,7 @@ URL:           %{forgeurl}
 Source0:       %{forgesource}
 Source1:       https://gitlab.xfce.org/panel-plugins/xfce4-windowck-plugin/-/raw/eeffa180d4b0828bcd4e9da0c504ac6524e1a0b4/configure.ac.in
 Source2:       https://gitlab.xfce.org/panel-plugins/xfce4-windowck-plugin/-/commit/dee596492f006d02e2b39abd072ddd7b37fefe82.diff
+Source3:       https://git.launchpad.net/compiz/plain/compizconfig/gsettings/org.compiz.gschema.xml
 
 Provides:      unity-shell
 BuildRequires: cmake
@@ -52,6 +53,7 @@ BuildRequires: xfce4-vala
 BuildRequires: xfce4-dev-tools
 
 Requires:      python3-pydbus
+Requires:      python3-psutil
 Requires:      unity-asset-pool
 Requires:      libunity-misc-devel
 Requires:      geis-devel
@@ -169,6 +171,10 @@ pushd unityx/windowck-plugin
 rm -fv %{buildroot}%{_libdir}/*.la
 popd
 
+# unityx-launcher still requires compiz gsettings schema and the 8 series doesn't provide one
+# Though it isn't really needed aside from that
+install -m 0644 %{SOURCE3} -t %{buildroot}%{_datarootdir}/glib-2.0/schemas
+
 %find_lang unityx
 %find_lang xfce4-windowck-plugin
 
@@ -189,6 +195,7 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_libdir}/libunityx-core-6.0.so.*
 %{_datadir}/glib-2.0/schemas/org.unityd.UnityX.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.unityd.UnityX.user-interface.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.compiz.gschema.xml
 %dir %{_datadir}/unityx
 %dir %{_datadir}/unityx/icons
 %{_datadir}/unityx/icons/dash-widgets.json

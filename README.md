@@ -18,7 +18,7 @@ Something that is different is this uses [UnityX](https://unityd.org) ([source c
 * [X] frame-devel
 * [X] gsettings-ubuntu-touch-schemas
 * [X] ~~ido-devel~~
-#### Related to Unity but not needed
+#### Related to Unity
 * [X] vala-panel
 * [X] vala-panel-appmenu
 * ~~[unity-tweak-tool](https://github.com/freyja-dev/unity-tweak-tool)~~
