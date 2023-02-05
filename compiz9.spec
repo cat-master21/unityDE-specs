@@ -52,29 +52,34 @@ BuildRequires: gcovr
 BuildRequires: mesa-libEGL-devel
 BuildRequires: glib2-devel
 BuildRequires: xorg-x11-server-devel
-
 Requires:      glib2
 Requires:      xorg-x11-server-Xorg
 Requires:      metacity
 Requires:      glx-utils
 
-%package ccsm9
+%package devel
+Summary:	Development files for %{name}
+Requires:	%{name}%{?_isa} = %{version}-%{release}
+
+%description devel
+This package contains the development files for %{name}.
+
+%package -n python3-ccsm
 Summary: Compiz Config Manager
 Conflicts: ccsm
 Requires: %{name}%{?_isa}
 
-%description ccsm9
+%description -n python3-ccsm
 Compiz Config Manager helps configure Compiz Window Manager, version 0.9 series
 
 %description
 Compiz 9 branch, which is newer then what Fedora packages and required by Unity 7.6 and higher.
 
 %prep
-%setup -q -n compiz
-%patch0 -p1
+%autosetup -p1 -n compiz
 
 %build
-%cmake -DCOMPIZ_DISABLE_GS_SCHEMAS_INSTALL=OFF -DBUILD_GTK=On -DBUILD_METACITY=On -DCOMPIZ_BUILD_TESTING=Off -DBUILD_GLES=ON -DCOMPIZ_PACKAGING_ENABLED=TRUE -DBUILD_XORG_GTEST=OFF -DCOMPIZ_BUILD_WITH_RPATH=FALSE -DCOMPIZ_WERROR=Off
+%cmake -DCOMPIZ_DISABLE_GS_SCHEMAS_INSTALL=OFF -DBUILD_GTK=ON -DBUILD_METACITY=ON -DCOMPIZ_BUILD_TESTING=OFF -DBUILD_GLES=ON -DCOMPIZ_PACKAGING_ENABLED=TRUE -DBUILD_XORG_GTEST=OFF -DCOMPIZ_BUILD_WITH_RPATH=FALSE -DCOMPIZ_WERROR=OFF
 %cmake_build
 
 %install
@@ -86,38 +91,61 @@ desktop-file-install                              \
 %{buildroot}%{_datadir}/applications/*.desktop
 
 find %{buildroot} -name '*.la' -exec rm -f {} ';'
-find %{buildroot} -name '*.a' -exec rm -f {} ';'
 
 %find_lang ccsm
+%find_lang compiz
+
+%py3_shebang_fix $RPM_BUILD_ROOT%{_bindir}/ccsm
 
 # placeholder for local icons
 mkdir -p %{buildroot}%{_datadir}/compiz/icons/hicolor/{scalable/{apps,\
 categories},22x22/{categories,devices,mimetypes}}
 
-pushd %{buildroot}/usr
-find . ! -type d -exec ls {} + | grep -v ccm | grep -v ccsm | grep -v ccm | grep -v python > %{_builddir}/compiz/files.txt
-popd
-
-sed -i s/^\.\\/// ./files.txt
-sed -i 'sn^n%{_usr}/n' ./files.txt
-
-%files -f files.txt
+%files -f compiz.lang
 %doc AUTHORS README INSTALL NEWS
 %license COPYING COPYING.GPL COPYING.LGPL COPYING.MIT
 %config %{_sysconfdir}/compizconfig/config.conf
+%{_bindir}/compiz
+%{_bindir}/compiz-decorator
+%{_bindir}/gtk-window-decorator
+%{_libdir}/libcompizconfig.so.*
+%{_libdir}/libcompizconfig_gsettings_backend.so
+%{_libdir}/libcompiz_core.so.*
+%{_libdir}/libdecoration.so.*
+%dir %{_libdir}/compiz
+%{_libdir}/compiz/*.so
+%dir %{_libdir}/compizconfig
+%dir %{_libdir}/compizconfig/backends
+%{_libdir}/compizconfig/backends/*.so
+%{python3_sitearch}/compizconfig.cpython*.so
+%{python3_sitearch}/compizconfig_python*.egg-info/
+%{_datadir}/applications/compiz.desktop
+%{_datadir}/compiz/
+%{_datadir}/glib-2.0/schemas/org.compiz*.gschema.xml
+%{_datadir}/gnome-control-center/keybindings/50-compiz-*.xml
 
-%files ccsm9 -f ccsm.lang
+%files devel
+%{_includedir}/compiz/
+%dir %{_includedir}/compizconfig
+%{_includedir}/compizconfig/*.h
+%{_libdir}/libcompizconfig.so
+%{_libdir}/libcompiz_core.so
+%{_libdir}/libdecoration.so
+%{_libdir}/pkgconfig/*.pc
+%{_datadir}/cmake/Modules/*.cmake
+
+%files -n python3-ccsm -f ccsm.lang
 %doc AUTHORS NEWS
 %license COPYING
 %{_bindir}/ccsm
 %{_datadir}/applications/ccsm.desktop
 %dir %{_datadir}/ccsm
 %{_datadir}/ccsm/*
-%{_datadir}/icons/hicolor/*/apps/ccsm.*
+%{_datadir}/icons/hicolor/*/apps/ccsm.png
+%{_datadir}/icons/hicolor/*/apps/ccsm.svg
 %dir %{python3_sitelib}/ccm
 %{python3_sitelib}/ccm/*
 %{python3_sitelib}/ccsm-%{version}-py%{python3_version}.egg-info
-%{python3_sitearch}/*
 
 %changelog
 %autochangelog

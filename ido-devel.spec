@@ -29,13 +29,15 @@ Requires:      gtk3
 Widgets and other objects used for indicators.
 
 %prep
-%setup -q -c
-%patch0 -p1
+%autosetup -c -p1
 
 %build
+# Remove tests
 sed -i 's/tests//' ./Makefile.am
 sed -i '149d' ./configure.ac
 sed -i 's.-Wno-error=deprecated-declarations..' ./src/Makefile.am
+# Requires gtk/ubuntu-private.h
+sed -i '/idomenuitemfactory/d' ./src/Makefile.am
 NOCONFIGURE=1 \
 ./autogen.sh
 
@@ -43,6 +45,7 @@ NOCONFIGURE=1 \
 
 %configure \
   --disable-silent-rules \
+  --enable-gtk-doc \
   --disable-static
 
 %make_build

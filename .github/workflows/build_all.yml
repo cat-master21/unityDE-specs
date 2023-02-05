@@ -55,10 +55,10 @@ jobs:
         dnf builddep -y --spec ./libunity-misc-devel.spec
         rpmbuild --nodebuginfo -bb ./libunity-misc-devel.spec
 
-#    - name: Build compiz9
-#      run: |
-#        dnf builddep -y --spec ./compiz9.spec
-#        rpmbuild --nodebuginfo -bb ./compiz9.spec
+    - name: Build compiz9
+      run: |
+        dnf builddep -y --spec ./compiz9.spec
+        rpmbuild --nodebuginfo -bb ./compiz9.spec
 
     - name: Build frame-devel
       run: |
@@ -127,17 +127,22 @@ jobs:
         dnf builddep -y --spec ./vala-panel-appmenu.spec
         rpmbuild --nodebuginfo -bb ./vala-panel-appmenu.spec
 
-    - name: Build unityx-shell
+    - name: Build unity-shell
       run: |
         dnf install -y "$(rpm --eval '%{_rpmdir}')"/*/*.rpm
+        dnf builddep -y --spec ./unity-shell.spec
+        rpmbuild --nodebuginfo -bb ./unity-shell.spec
+
+    - name: Build unityx-shell
+      run: |
         dnf builddep -y --spec ./unityx-shell.spec
         rpmbuild --nodebuginfo -bb ./unityx-shell.spec
 
-#    - name: Build unity-session
-#      run: |
-#        dnf install -y "$(rpm --eval '%{_rpmdir}')"/*/unityx-shell*.rpm
-#        dnf builddep -y --spec ./unity-session.spec
-#        rpmbuild --nodebuginfo -bb ./unity-session.spec
+    - name: Build unity-session
+      run: |
+        dnf install -y "$(rpm --eval '%{_rpmdir}')"/*/unity-shell*.rpm
+        dnf builddep -y --spec ./unity-session.spec
+        rpmbuild --nodebuginfo -bb ./unity-session.spec
 
     - name: Upload RPMs
       if: success() || failure()

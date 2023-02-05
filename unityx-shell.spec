@@ -173,7 +173,7 @@ popd
 
 # unityx-launcher still requires compiz gsettings schema and the 8 series doesn't provide one
 # Though it isn't really needed aside from that
-install -m 0644 %{SOURCE3} -t %{buildroot}%{_datarootdir}/glib-2.0/schemas
+install -m 0644 %{SOURCE3} -t %{buildroot}%{_datadir}/glib-2.0/schemas
 
 %find_lang unityx
 %find_lang xfce4-windowck-plugin

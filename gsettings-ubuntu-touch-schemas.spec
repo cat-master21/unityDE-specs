@@ -37,11 +37,11 @@ rm -fv %{buildroot}%{_libdir}/*.la
 
 %files
 %license COPYING
-%{_datarootdir}/accountsservice/interfaces/*.xml
-%{_datarootdir}/dbus-1/interfaces/*.xml
-%{_datarootdir}/glib-2.0/schemas/*.xml
-%{_datarootdir}/pkgconfig/gsettings-unity-schemas.pc
-%{_datarootdir}/polkit-1/actions/com.ubuntu.AccountsService.policy
+%{_datadir}/accountsservice/interfaces/*.xml
+%{_datadir}/dbus-1/interfaces/*.xml
+%{_datadir}/glib-2.0/schemas/*.xml
+%{_datadir}/pkgconfig/gsettings-unity-schemas.pc
+%{_datadir}/polkit-1/actions/com.ubuntu.AccountsService.policy
 %{_sharedstatedir}/polkit-1/localauthority/10-vendor.d/50-com.ubuntu.AccountsService.pkla
 
 %changelog
