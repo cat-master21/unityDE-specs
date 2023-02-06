@@ -140,6 +140,7 @@ find %{buildroot} -type f -name '*.la' -delete
 %license COPYING
 %doc AUTHORS COPYING NEWS ChangeLog
 %{_libdir}/libindicator.so.*
+%{_prefix}/lib/indicators/
 %dir %{_datadir}/libindicator/
 %dir %{_datadir}/libindicator/icons/
 %{_userunitdir}/indicators-pre.target
@@ -154,9 +155,9 @@ find %{buildroot} -type f -name '*.la' -delete
 %files gtk3
 %doc AUTHORS COPYING NEWS ChangeLog
 %{_libdir}/libindicator3.so.*
+%{_prefix}/lib/indicators3/
 %dir %{_datadir}/libindicator/
 %dir %{_datadir}/libindicator/icons/
-
 
 %files gtk3-devel
 %dir %{_includedir}/libindicator3-0.4/

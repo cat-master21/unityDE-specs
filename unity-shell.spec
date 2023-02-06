@@ -2,8 +2,6 @@
 %global commit f2fb4437821b083a655e82c6fc97cb9d04c70041
 %forgemeta
 
-#define _python /usr/bin/python3
-
 Name:           unity-shell
 Version:        1.7.7
 Release:        1%{?dist}
@@ -128,9 +126,10 @@ popd
 # Not the correct directory, /usr/etc/pam.d should be /etc/pam.d
 mv -f %{buildroot}%{_prefix}%{_sysconfdir}/* %{buildroot}%{_sysconfdir}
 rm -rf %{buildroot}%{_prefix}%{_sysconfdir}
-
 # Upstart init is dead a long time ago and there isn't any package that provides anything to do with it.
 rm -rf %{buildroot}%{_datadir}/upstart
+# Needed directory for unity-panel-service
+mkdir %{buildroot}%{_datadir}/unity/indicators
 
 %find_lang unity
 
@@ -193,12 +192,13 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.compiz.unitymtgrabhandles.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.compiz.unityshell.gschema.xml
 %dir %{_datadir}/unity/
+%dir %{_datadir}/unity/indicators/
 %dir %{_datadir}/unity/icons/
-%dir %{_datadir}/unity/themes/
 %{_datadir}/unity/icons/dash-widgets.json
 %{_datadir}/unity/icons/*.png
 %{_datadir}/unity/icons/*.svg
 %{_datadir}/unity/icons/searchingthedashlegalnotice.html
+%dir %{_datadir}/unity/themes/
 %{_datadir}/unity/themes/dash-widgets.json
 %{_datadir}/compiz/unitymtgrabhandles.xml
 %{_datadir}/compiz/unityshell.xml
