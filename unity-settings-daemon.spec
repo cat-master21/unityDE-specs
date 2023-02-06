@@ -75,7 +75,7 @@ rm -fv %{buildroot}%{_libdir}/unity-settings-daemon-1.0/*.la %{buildroot}%{_libd
 
 pushd %{buildroot}
 mkdir -p usr/bin
-ln -s usr/libexec/unity-settings-daemon usr/bin/unity-settings-daemon
+ln -fs %{_libexecdir}/unity-settings-daemon .%{_bindir}/unity-settings-daemon
 popd
 
 # Install this

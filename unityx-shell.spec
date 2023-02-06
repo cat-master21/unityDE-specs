@@ -1,6 +1,5 @@
-# Spectool has a bug where it can't download from https://gitlab.com/ubuntu-unity/unity-x/unityx
-%global forgeurl https://gitlab.com/cat-master21/unityx
-%global commit a43578fa78f12ff47bb4d7d88d373333cd4af532
+%global forgeurl https://gitlab.com/ubuntu-unity/unity-x/unityx
+%global commit 46dd5199d1cce639f559eda4519aff77ef9c4433
 %forgemeta
 
 %define __python /usr/bin/python3
@@ -11,16 +10,14 @@ Release:       1%{?dist}
 Summary:       Unity7 is a shell that sings
 
 License:       GPLv3 AND LGPLv3
-URL:           %{forgeurl}
-Source0:       %{forgesource}
-Source1:       https://gitlab.xfce.org/panel-plugins/xfce4-windowck-plugin/-/raw/eeffa180d4b0828bcd4e9da0c504ac6524e1a0b4/configure.ac.in
+URL:           https://gitlab.com/ubuntu-unity/unity-x/unityx
+Source0:       %{url}/-/archive/%commit/unityx-%commit.tar.bz2
 Source2:       https://gitlab.xfce.org/panel-plugins/xfce4-windowck-plugin/-/commit/dee596492f006d02e2b39abd072ddd7b37fefe82.diff
-Source3:       https://git.launchpad.net/compiz/plain/compizconfig/gsettings/org.compiz.gschema.xml
 
-Provides:      unity-shell
 BuildRequires: cmake
 BuildRequires: g++
 BuildRequires: gcc
+BuildRequires: chrpath
 BuildRequires: pkgconfig(dee-1.0)
 BuildRequires: pkgconfig(unity-settings-daemon)
 BuildRequires: pkgconfig(gnome-desktop-3.0)
@@ -38,10 +35,8 @@ BuildRequires: doxygen
 BuildRequires: pam-devel
 BuildRequires: boost-devel
 BuildRequires: pkgconfig(nux-4.0)
-BuildRequires: gtk3-devel
 BuildRequires: pkgconfig(libstartup-notification-1.0)
 BuildRequires: pkgconfig(unity-protocol-private)
-
 # unityx-shell-xfce4-windowck-plugin
 BuildRequires: pkgconfig(libwnck-3.0)
 BuildRequires: pkgconfig(libxfconf-0)
@@ -52,6 +47,10 @@ BuildRequires: pkgconfig(gtk+-3.0)
 BuildRequires: xfce4-vala
 BuildRequires: xfce4-dev-tools
 
+# Various things are missing that it won't run and it gives a segmentfault if Unity is missing?
+# Needs more investigating
+# Still gives a segmentfault but oh well
+Requires:      unity-shell
 Requires:      python3-pydbus
 Requires:      python3-psutil
 Requires:      unity-asset-pool
@@ -84,19 +83,15 @@ The Unity desktop experience is designed to allow for multiple implementations,
 currently, Unity consists of a Compiz plugin based visual interface only, which
 is heavily dependent on OpenGL.
 
-
 %package xfce4-windowck-plugin
 Summary:	Core library for the Unity shell
-
 Requires:	%{name}%{?_isa} = %{version}-%{release}
 
 %description xfce4-windowck-plugin
 This package contains the core library needed for Unity and Unity 2D.
 
-
 %package devel
 Summary:	Development files for the core Unity library
-
 Requires:	%{name}%{?_isa} = %{version}-%{release}
 Requires:	pkgconfig(dee-1.0)
 Requires:	pkgconfig(glib-2.0)
@@ -106,7 +101,6 @@ Requires:	pkgconfig(nux-4.0)
 
 %description devel
 This package contains the development files the core Unity library.
-
 
 %package -n plotinus
 Summary:	Automatic testing for Unity
@@ -118,7 +112,7 @@ keyboard and mouse events automatically. This package also contains the bindings
 needed for writing automated tests in Python.
 
 %prep
-%forgeautosetup
+%autosetup -n unityx-%commit
 
 %build
 # Wrong paths
@@ -130,14 +124,10 @@ sed -i 's!unity-settings-daemon!%{_libexecdir}/unity-settings-daemon!' unityx/un
 # Fix invalid argument calling dbus-update-activation-environment
 sed -i 's/'--all', //' unityx/unityx
 
-# Remove rpath
-sed -i '/RPATH/d' UnityCore/CMakeLists.txt
-sed -i 's/SOVERSION ${CORE_LIB_LT_CURRENT}/SOVERSION ${CORE_LIB_LT_CURRENT})/' UnityCore/CMakeLists.txt
-
-# The caches again!!
+# The caches again!
 rm -fv unityx/windowck-plugin/po/.intltool-merge-cache*
 
-%cmake -DENABLE_X_SUPPORT=ON
+%cmake -DENABLE_X_SUPPORT=ON -DUNITY_PROTOCOL_PRIVATE_LIB=%{_libdir}/libunity/libunity-protocol-private.so.0.0.0 -DCOMPIZ_BUILD_WITH_RPATH=FALSE -DCOMPIZ_PACKAGING_ENABLED=TRUE -DCOMPIZ_PLUGIN_INSTALL_TYPE=package -DUSE_GSETTINGS=TRUE -DENABLE_UNIT_TESTS=FALSE
 %cmake_build
 
 pushd unityx/plotinus
@@ -148,8 +138,7 @@ sed -i 's/LIBRARY DESTINATION lib/LIBRARY DESTINATION %{_lib}/' CMakeLists.txt
 popd
 
 pushd unityx/windowck-plugin
-cp %{SOURCE1} configure.ac.in
-# Fix the file missing and icons being blurry
+# Upstream patch to fix icons being blurry
 patch -i %{SOURCE2} -p1
 
 NOCONFIGURE=1 \
@@ -171,14 +160,14 @@ pushd unityx/windowck-plugin
 rm -fv %{buildroot}%{_libdir}/*.la
 popd
 
-# unityx-launcher still requires compiz gsettings schema and the 8 series doesn't provide one
-# Though it isn't really needed aside from that
-install -m 0644 %{SOURCE3} -t %{buildroot}%{_datadir}/glib-2.0/schemas
+chrpath --delete %{buildroot}%{_libdir}/libunityx-core-6.0.so.9.0.0
+
+pushd %{buildroot}
+ln -s %{_libdir}/unity .%{_libdir}/unityx
+popd
 
 %find_lang unityx
 %find_lang xfce4-windowck-plugin
-
-%preun
 
 %postun
 if [ ${1} -eq 0 ]; then
@@ -192,10 +181,10 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %doc AUTHORS ChangeLog INSTALL README.md
 %license COPYING COPYING.LGPL
 %{_bindir}/unityx*
+%{_libdir}/unityx
 %{_libdir}/libunityx-core-6.0.so.*
 %{_datadir}/glib-2.0/schemas/org.unityd.UnityX.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.unityd.UnityX.user-interface.gschema.xml
-%{_datadir}/glib-2.0/schemas/org.compiz.gschema.xml
 %dir %{_datadir}/unityx
 %dir %{_datadir}/unityx/icons
 %{_datadir}/unityx/icons/dash-widgets.json

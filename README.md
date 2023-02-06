@@ -26,12 +26,14 @@ Unity(X) shell which had only been done [once before a long time ago](https://gi
 * [X] vala-panel
 * [X] vala-panel-appmenu
 * [unity-tweak-tool](https://github.com/freyja-dev/unity-tweak-tool)
-* unity-control-center
-* [] unityx-control-center
-* [] unityx-power-manager
+* [ ] unity-control-center
+* [ ] unityx-control-center
+* [ ] unityx-power-manager
 * ~~unity-greeter
 * [X] unity-session
 * [X] ccsm
+* [ ] unity-scope-home
+* [ ] unity-lens-applications
 
 # Contributing
 See [CONTRIBUTING.md](https://github.com/cat-master21/unityDE-specs/blob/main/CONTRIBUTING.md) on how to contribute.
