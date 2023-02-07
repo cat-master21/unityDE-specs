@@ -38,6 +38,8 @@ BuildRequires: compiz9-devel
 BuildRequires: pkgconfig(unity-misc)
 BuildRequires: chrpath
 BuildRequires: systemd-rpm-macros
+Requires:      gsettings-ubuntu-touch-schemas
+#Requires:      unity-scope-home
 Requires:      %{name}-data = %{version}-%{release}
 Requires:      %{name}-core%{?_isa} = %{version}-%{release}
 Requires:      pam

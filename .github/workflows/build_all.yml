@@ -8,11 +8,12 @@ jobs:
       image: fedora
       env:
         shell: bash
+        PACKAGECLOUD_TOKEN: ${{ secrets.PACKAGECLOUD_TOKEN }}
     steps:
     - uses: actions/checkout@v3
 
     - name: Install dependencies
-      run: dnf install -y curl rpmdevtools rpm-build dnf-utils
+      run: dnf install -y curl rpmdevtools rpm-build dnf-utils rubygems ruby-devel
 
     - name: Download RPM Sources
       run: |
@@ -150,3 +151,9 @@ jobs:
       with:
           name: x86_64-fedora-latest-RPMS
           path: ~/rpmbuild/RPMS/*
+
+    - name: Upload RPMs to Packagecloud
+      run: |
+        gem install package_cloud
+        echo '{"url":"https://packagecloud.io", "token": "${{ secrets.PACKAGECLOUD_TOKEN }}"}' > $HOME/.packagecloud
+        package_cloud push cat-master21/That-missing-RPM/fedora/$(cut -f3 --delimiter=' ' /etc/fedora-release) ~/rpmbuild/RPMS/*

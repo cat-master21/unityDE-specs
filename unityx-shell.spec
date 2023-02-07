@@ -49,7 +49,6 @@ BuildRequires: xfce4-dev-tools
 
 # Various things are missing that it won't run and it gives a segmentfault if Unity is missing?
 # Needs more investigating
-# Still gives a segmentfault but oh well
 Requires:      unity-shell
 Requires:      python3-pydbus
 Requires:      python3-psutil
