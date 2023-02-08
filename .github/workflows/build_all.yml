@@ -18,6 +18,7 @@ jobs:
     - name: Download RPM Sources
       run: |
         rpmdev-setuptree
+        mv patches/* ~/rpmbuild/SOURCES
         for i in ./*.spec
         do
         spectool -R -g $i 2> /dev/null &

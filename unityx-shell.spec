@@ -50,6 +50,7 @@ BuildRequires: xfce4-dev-tools
 # Various things are missing that it won't run and it gives a segmentfault if Unity is missing?
 # Needs more investigating
 Requires:      unity-shell
+#Requires:      unity-scope-home
 Requires:      python3-pydbus
 Requires:      python3-psutil
 Requires:      unity-asset-pool
