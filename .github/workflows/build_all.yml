@@ -157,4 +157,4 @@ jobs:
       run: |
         gem install package_cloud
         echo '{"url":"https://packagecloud.io", "token": "${{ secrets.PACKAGECLOUD_TOKEN }}"}' > $HOME/.packagecloud
-        package_cloud push cat-master21/That-missing-RPM/fedora/$(cut -f3 --delimiter=' ' /etc/fedora-release) ~/rpmbuild/RPMS/*
+        package_cloud push cat-master21/That-missing-RPM/fedora/$(cut -f3 --delimiter=' ' /etc/fedora-release) $HOME/rpmbuild/RPMS/*.rpm
