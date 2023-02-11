@@ -13,6 +13,7 @@ License:       GPLv3 AND LGPLv3
 URL:           https://gitlab.com/ubuntu-unity/unity-x/unityx
 Source0:       %{url}/-/archive/%commit/unityx-%commit.tar.bz2
 Source2:       https://gitlab.xfce.org/panel-plugins/xfce4-windowck-plugin/-/commit/dee596492f006d02e2b39abd072ddd7b37fefe82.diff
+Patch0:        0001-Remove-social-scope.patch
 
 BuildRequires: cmake
 BuildRequires: g++
@@ -50,7 +51,7 @@ BuildRequires: xfce4-dev-tools
 # Various things are missing that it won't run and it gives a segmentfault if Unity is missing?
 # Needs more investigating
 Requires:      unity-shell
-#Requires:      unity-scope-home
+Requires:      unity-scope-home
 Requires:      python3-pydbus
 Requires:      python3-psutil
 Requires:      unity-asset-pool
@@ -112,7 +113,7 @@ keyboard and mouse events automatically. This package also contains the bindings
 needed for writing automated tests in Python.
 
 %prep
-%autosetup -n unityx-%commit
+%autosetup -n unityx-%commit -p1
 
 %build
 # Wrong paths
@@ -207,7 +208,6 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_includedir}/UnityX-6.0/UnityCore/*.h
 %{_libdir}/libunityx-core-6.0.so
 %{_libdir}/pkgconfig/unityx-core-6.0.pc
-
 
 %files xfce4-windowck-plugin -f xfce4-windowck-plugin.lang
 %doc unityx/windowck-plugin/AUTHORS unityx/windowck-plugin/NEWS unityx/windowck-plugin/README.md

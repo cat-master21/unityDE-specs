@@ -32,7 +32,7 @@ Unity(X) shell which had only been done [once before a long time ago](https://gi
 * ~~unity-greeter
 * [X] unity-session
 * [X] ccsm
-* [ ] unity-scope-home
+* [X] unity-scope-home
 * [ ] unity-lens-applications
 
 # Contributing

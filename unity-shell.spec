@@ -13,6 +13,7 @@ URL:            https://gitlab.com/ubuntu-unity/unity/unity
 Source0:        %{url}/-/archive/%commit/unity-%commit.tar.bz2
 Patch0:         0001-Remove-xpathselect-dependency.patch
 Patch1:         0002-Remove-ido-dependency.patch
+Patch2:         0003-Remove-social-scope.patch
 
 BuildRequires: cmake
 BuildRequires: g++
@@ -39,7 +40,7 @@ BuildRequires: pkgconfig(unity-misc)
 BuildRequires: chrpath
 BuildRequires: systemd-rpm-macros
 Requires:      gsettings-ubuntu-touch-schemas
-#Requires:      unity-scope-home
+Requires:      unity-scope-home
 Requires:      %{name}-data = %{version}-%{release}
 Requires:      %{name}-core%{?_isa} = %{version}-%{release}
 Requires:      pam

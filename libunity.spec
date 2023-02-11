@@ -1,15 +1,15 @@
 Name:    libunity
 Summary: Supporting library for Unity shell
-Version: 7.1.4
+Version: 7.1.4+19.04
 Release: 1%{?dist}
 
 License: GPLv3+ AND LGPLv3+
 URL:     https://launchpad.net/libunity
 # same sources as shipped in ubuntu packages
-Source0: http://archive.ubuntu.com/ubuntu/pool/main/libu/libunity/libunity_%{version}+19.04.20190319.orig.tar.gz
-Patch0:  https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/libunity/%{version}+19.04.20190319-0ubuntu1/libunity_%{version}+19.04.20190319-0ubuntu1.diff.gz
+Source0: http://archive.ubuntu.com/ubuntu/pool/main/libu/libunity/libunity_7.1.4+19.04.20190319.orig.tar.gz
+Patch0:  https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/libunity/7.1.4+19.04.20190319-0ubuntu1/libunity_7.1.4+19.04.20190319-0ubuntu1.diff.gz
 
-Patch0001:  https://launchpadlibrarian.net/443817430/0001-Fix-FTB-with-recent-vala-requiring-non-public-abstra.patch
+Patch1:  https://launchpadlibrarian.net/443817430/0001-Fix-FTB-with-recent-vala-requiring-non-public-abstra.patch
 # Patch for vala 0.53.2 portability
 Patch2:  https://src.fedoraproject.org/rpms/libunity/raw/rawhide/f/libunity-7.1.4-vala-053.patch
 
@@ -42,13 +42,8 @@ Requires: python3-gobject-base
 %description -n python3-libunity
 %{summary}.
 
-
 %prep
-%setup -q -c
-%patch0 -p1
-%patch1 -p1 -b .0001
-%patch2 -p1 -b .vala_053
-
+%autosetup -c -p1
 
 %build
 NOCONFIGURE=1 \
@@ -62,7 +57,6 @@ export PYTHON
   --disable-static
 
 %make_build
-
 
 %install
 %make_install
@@ -122,7 +116,6 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 %{_datadir}/vala/vapi/unity-extras.*
 %{_datadir}/vala/vapi/unity-protocol.*
 %{_datadir}/vala/vapi/unity-trace.*
-
 
 %changelog
 %autochangelog

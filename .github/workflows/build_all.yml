@@ -118,6 +118,11 @@ jobs:
         dnf builddep -y --spec ./unity-asset-pool.spec
         rpmbuild --nodebuginfo -bb ./unity-asset-pool.spec
 
+    - name: Build unity-scope-home
+      run: |
+        dnf builddep -y --spec ./unity-scope-home.spec
+        rpmbuild --nodebuginfo -bb ./unity-scope-home.spec
+
     - name: Build vala-panel
       run: |
         dnf builddep -y --spec ./vala-panel.spec
