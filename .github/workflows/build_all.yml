@@ -123,6 +123,11 @@ jobs:
         dnf builddep -y --spec ./unity-scope-home.spec
         rpmbuild --nodebuginfo -bb ./unity-scope-home.spec
 
+    - name: Build unity-greeter
+      run: |
+        dnf builddep -y --spec ./unity-greeter.spec
+        rpmbuild --nodebuginfo -bb ./unity-greeter.spec
+
     - name: Build vala-panel
       run: |
         dnf builddep -y --spec ./vala-panel.spec

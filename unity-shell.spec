@@ -39,14 +39,16 @@ BuildRequires: compiz9-devel
 BuildRequires: pkgconfig(unity-misc)
 BuildRequires: chrpath
 BuildRequires: systemd-rpm-macros
+Requires:      unity-greeter
+Requires:      python3-gobject
+Requires:      dconf
 Requires:      gsettings-ubuntu-touch-schemas
 Requires:      unity-scope-home
 Requires:      %{name}-data = %{version}-%{release}
 Requires:      %{name}-core%{?_isa} = %{version}-%{release}
 Requires:      pam
 Requires:      libunity-misc-devel
-Requires:      geis-devel
-Requires:      bamf
+Requires:      bamf-daemon
 Requires:      unity-gtk-module-common
 Requires:      compiz9
 Requires:      libindicator-gtk3
@@ -143,6 +145,8 @@ chrpath --delete $RPM_BUILD_ROOT%{_libdir}/libunity-core-6.0.so.9.0.0
 %py3_shebang_fix $RPM_BUILD_ROOT%{_bindir}/unity
 %py3_shebang_fix $RPM_BUILD_ROOT%{_libdir}/unity/makebootchart.py
 
+%ldconfig_post
+
 %postun
 if [ ${1} -eq 0 ]; then
   glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
@@ -150,11 +154,6 @@ fi
 
 %posttrans
 glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
-
-
-%post core -p /sbin/ldconfig
-
-%postun core -p /sbin/ldconfig
 
 %files
 %doc AUTHORS ChangeLog HACKING README

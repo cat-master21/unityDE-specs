@@ -29,7 +29,7 @@ Unity(X) shell which had only been done [once before a long time ago](https://gi
 * [ ] unity-control-center
 * [ ] unityx-control-center
 * [ ] unityx-power-manager
-* ~~unity-greeter
+* [X] unity-greeter
 * [X] unity-session
 * [X] ccsm
 * [X] unity-scope-home

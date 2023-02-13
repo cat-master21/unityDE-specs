@@ -12,4 +12,6 @@ This Directory contains patches, either modifications to spec files or sources.
 
 * `0001-Remove-xpathselect-dependency.patch` This patch removes the unneeded dependency of `xpathselect` from Unity which is extremely old (last commit in 2014). This is for `unity-shell.spec`
 
-* `0001-Remove-social-scope.patch` and `0003-Remove-social-scope.patch` are used to remove the social.scope which is not used anymore. `0001-Remove-social-scope.patch` is used in `unityx-shell.spec` and `0003-Remove-social-scope.patch` is used in `unity-shell.spec`.
+* `0001-Remove-social-scope.patch` and `0003-Remove-social-scope.patch` are used to remove the social.scope which is not used anymore. `0001-Remove-social-scope.patch` is used in `unityx-shell.spec` and `0003-Remove-social-scope.patch` is used in `unity-shell.spec`
+
+* `0001-Remove-libido.patch` Remove the ido dependency in `unity-greeter`. Used in `unity-greeter.spec`

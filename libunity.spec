@@ -14,14 +14,13 @@ Patch1:  https://launchpadlibrarian.net/443817430/0001-Fix-FTB-with-recent-vala-
 Patch2:  https://src.fedoraproject.org/rpms/libunity/raw/rawhide/f/libunity-7.1.4-vala-053.patch
 
 BuildRequires: automake libtool gnome-common
-BuildRequires: which
 BuildRequires: intltool
 BuildRequires: pkgconfig(dee-1.0)
 BuildRequires: pkgconfig(dbusmenu-glib-0.4)
 BuildRequires: pkgconfig(glib-2.0)
 BuildRequires: pkgconfig(gobject-introspection-1.0)
 BuildRequires: pkgconfig(gtk+-3.0)
-BuildRequires: python3-devel python3
+BuildRequires: python3-devel
 BuildRequires: vala
 BuildRequires: make
 
@@ -64,7 +63,8 @@ export PYTHON
 rm -fv %{buildroot}%{_libdir}/lib*.la %{buildroot}%{_libdir}/libunity/lib*.la
 
 pushd %{buildroot}
-ln -s .%{_libdir}/libunity/libunity-protocol-private.so.0.0.0 .%{_libdir}/libunity-protocol-private.so
+ln -fs %{_libdir}/libunity/libunity-protocol-private.so.0.0.0 .%{_libdir}/libunity-protocol-private.so
+ln -fs %{_libdir}/libunity/libunity-protocol-private.so.0.0.0 .%{_libdir}/libunity-protocol-private.so.0
 popd
 
 %py_byte_compile %{__python3} %{buildroot}%{python3_sitearch}/gi/overrides/
@@ -89,6 +89,7 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 %{_bindir}/unity-scope-loader
 %{_libdir}/libunity.so.*
 %{_libdir}/libunity-extras.so.*
+%{_libdir}/libunity-protocol-private.so.0
 %{_libdir}/girepository-1.0/Unity-7.0.typelib
 %{_libdir}/girepository-1.0/UnityExtras-7.0.typelib
 %dir %{_libdir}/libunity/

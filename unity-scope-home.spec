@@ -12,6 +12,7 @@ BuildRequires: intltool
 BuildRequires: make
 BuildRequires: gcc
 BuildRequires: g++
+BuildRequires: vala
 BuildRequires: pkgconfig(gobject-2.0)
 BuildRequires: pkgconfig(gio-2.0)
 BuildRequires: pkgconfig(gio-unix-2.0)

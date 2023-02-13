@@ -170,6 +170,8 @@ popd
 %find_lang unityx
 %find_lang xfce4-windowck-plugin
 
+%ldconfig_post
+
 %postun
 if [ ${1} -eq 0 ]; then
   glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
