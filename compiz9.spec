@@ -79,6 +79,8 @@ Compiz 9 branch, which is newer then what Fedora packages and required by Unity 
 %autosetup -p1 -n compiz
 
 %build
+# The driver blacklist hack is obselete
+sed -i 's/(nouveau|Intel).*Mesa 8.0//' plugins/opengl/opengl.xml.in
 %cmake -DCOMPIZ_DISABLE_GS_SCHEMAS_INSTALL=OFF -DBUILD_GTK=ON -DBUILD_METACITY=ON -DCOMPIZ_BUILD_TESTING=OFF -DBUILD_GLES=ON -DCOMPIZ_PACKAGING_ENABLED=TRUE -DBUILD_XORG_GTEST=OFF -DCOMPIZ_BUILD_WITH_RPATH=FALSE -DCOMPIZ_WERROR=OFF
 %cmake_build
 
@@ -120,7 +122,7 @@ categories},22x22/{categories,devices,mimetypes}}
 %{python3_sitearch}/compizconfig.cpython*.so
 %{python3_sitearch}/compizconfig_python*.egg-info/
 %{_datadir}/applications/compiz.desktop
-%{_datadir}/compiz/
+#{_datadir}/compiz/
 %{_datadir}/glib-2.0/schemas/org.compiz*.gschema.xml
 %{_datadir}/gnome-control-center/keybindings/50-compiz-*.xml
 
