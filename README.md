@@ -1,4 +1,5 @@
-# Unity(X) Shell Fedora RPMs
+# Currently the RPMs/specs in this repository have **migrated** to [Terrapkg](https://github.com/terrapkg) ([packages](https://github.com/terrapkg/packages)) repository
+## Unity(X) Shell Fedora RPMs
 
 This repository contains all the RPM spec files needed for
 Unity(X) shell which had only been done [once before a long time ago](https://github.com/chenxiaolong/Unity-for-Fedora). This uses [UnityX](https://unityd.org) ([source code](https://gitlab.com/ubuntu-unity/unity-x)) and [Unity7.7](https://unityd.org) ([source code](https://gitlab.com/ubuntu-unity/unity/unity)) which are forks maintained by [Ubuntu Unity](https://ubuntuunity.org/). This is tested and used on the latest stable version of Fedora.

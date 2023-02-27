@@ -43,7 +43,6 @@ Requires:      unity-greeter
 Requires:      python3-gobject
 Requires:      dconf
 Requires:      gsettings-ubuntu-touch-schemas
-Requires:      unity-scope-home
 Requires:      %{name}-data = %{version}-%{release}
 Requires:      %{name}-core%{?_isa} = %{version}-%{release}
 Requires:      pam
@@ -52,6 +51,7 @@ Requires:      bamf-daemon
 Requires:      unity-gtk-module-common
 Requires:      compiz9
 Requires:      libindicator-gtk3
+Recommends:    unity-scope-home
 
 %description
 Unity is a desktop experience that sings. Designed by Canonical and the Ayatana
